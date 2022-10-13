@@ -14,7 +14,7 @@ The interface displays Chinese or English depending on the thread.
 [![license](https://img.shields.io/static/v1?label=license&message=MIT&color=silver)](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/LICENSE) 
 ![C#](https://img.shields.io/github/languages/top/tp1415926535/ColorFontPickerWPF)        
 
-[![Description](https://img.shields.io/static/v1?label=English&message=Description&color=yellow)](https://github.com/tp1415926535/ColorFontPickerWPF# English Description) 
+[![Description](https://img.shields.io/static/v1?label=English&message=Description&color=yellow)](https://github.com/tp1415926535/ColorFontPickerWPF#english-description) 
 [![说明](https://img.shields.io/static/v1?label=中文&message=说明&color=red)](https://github.com/tp1415926535/ColorFontPickerWPF#中文说明)      
       
 # English Description
