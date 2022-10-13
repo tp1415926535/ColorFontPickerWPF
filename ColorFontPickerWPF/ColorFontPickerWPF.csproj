@@ -7,10 +7,20 @@
     <Company>纵码过河山</Company>
     <Description>Color picker and font picker add-ons built for WPF. Includes color dialog, color picker control, font dialog, font picker control. Dialogs follow Winform design, controls can be added directly in xaml and support collapsing. The interface displays Chinese or English depending on the thread.
 为WPF打造的颜色选择和字体选择附加功能。包括颜色对话框、颜色选择控件、字体对话框、字体选择控件。对话框沿用Winform的设计，控件可以直接在xaml中添加并支持折叠。界面根据线程显示中文或英文。</Description>
+    <PackageProjectUrl>https://github.com/tp1415926535/ColorFontPickerWPF</PackageProjectUrl>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="ColorMinePortable" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
