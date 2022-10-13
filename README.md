@@ -7,9 +7,12 @@ The interface displays Chinese or English depending on the thread.
 为WPF打造的颜色选择器和字体选择器附加功能。    
 包括颜色对话框、颜色选择控件、字体对话框、字体选择控件。    
 对话框沿用Winform的设计，控件可以直接在xaml中插入并支持折叠。    
-界面根据线程显示中文或英文。     
-
+界面根据线程显示中文或英文。   
+    
+ColorDialog:    
 ![ColorDialog](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorDialog.jpg)       
+     
+FontDialog:     
 ![FontDialog](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontDialog.jpg)      
       
 [![release](https://img.shields.io/static/v1?label=release&message=1.0.0&color=green&logo=github)](https://github.com/tp1415926535/ColorFontPickerWPF/releases) 
@@ -37,7 +40,10 @@ if (colorDialog.ShowDialog() == true)
 ```
 
 #### ColorPickerControl  
+ColorPickerControl-Style1:    
 ![ColorPickerControl](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorPickerControl.jpg)  
+     
+ColorPickerControl-Style2:    
 ![ColorPickerControl2](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorPickerControl2.jpg)      
 
 Additional Property **"SelectedColor"** can be get and set.    
@@ -72,8 +78,13 @@ if (fontDialog.ShowDialog() == true)
 ```
 
 #### FontPickerControl  
+FontPickerControl-style1:     
 ![FontPickerControl](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontPickerControl.jpg)  
+     
+FontPickerControl-style2:     
 ![FontPickerControl2](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontPickerControl2.jpg)  
+     
+FontPickerControl-style3:     
 ![FontPickerControl3](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontPickerControl3.jpg)     
 
 Additional Property **"SelectedFont"** can be get and set.    
@@ -133,8 +144,10 @@ or "fontDialog.SetFont()", "fontPickerControl.SetFont()" directly.
 ---
    
 # 中文说明   
-
+颜色对话框：     
 ![颜色对话框](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E9%A2%9C%E8%89%B2%E5%AF%B9%E8%AF%9D%E6%A1%86.jpg)       
+         
+字体对话框：     
 ![字体对话框](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E5%AF%B9%E8%AF%9D%E6%A1%86.jpg)      
 
 ## 使用   
@@ -154,8 +167,10 @@ if (colorDialog.ShowDialog() == true)
 ```
 
 #### 颜色选择控件（ColorPickerControl） 
-
+颜色选择控件-样式1：           
 ![ColorPickerControl](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorPickerControl.jpg)  
+          
+颜色选择控件-样式2：           
 ![ColorPickerControl2](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorPickerControl2.jpg)      
 
 附加属性“SelectedColor”（选择的颜色）可以设置和获取。   
@@ -190,9 +205,13 @@ if (fontDialog.ShowDialog() == true)
 ```
 
 #### 字体选择控件（FontPickerControl） 
-
+字体选择控件-样式1：    
 ![FontPickerControl](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontPickerControl.jpg)  
+            
+字体选择控件-样式2：    
 ![FontPickerControl2](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontPickerControl2.jpg)  
+             
+字体选择控件-样式3：    
 ![FontPickerControl3](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontPickerControl3.jpg)     
 
 附加属性 “SelectedFont”（选择的字体）可以获取和设置。    
