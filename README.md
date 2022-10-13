@@ -117,8 +117,9 @@ public enum TextDecorationType
 ``` 
 You can handle **SelectedFont** yourself, or use a wrapped method to "fontDialog.GetFont()", "fontPickerControl.GetFont()",
 or "fontDialog.SetFont()", "fontPickerControl.SetFont()" directly.
-   
-     
+* Change "System.Threading.Thread.CurrentThread.CurrentUICulture" can make the picker Language changed. Only support Chinese and English.
+* The color format conversion references the [ColorMine](https://github.com/muak/ColorMinePortable) nuget
+
 ---
    
 # 中文说明
@@ -223,3 +224,5 @@ public enum TextDecorationType
 ``` 
 你可以自行处理 “SelectedFont” 的值，或者直接使用封装的方法"fontDialog.GetFont()", "fontPickerControl.GetFont()",
 or "fontDialog.SetFont()", "fontPickerControl.SetFont()"。
+* 设置 "System.Threading.Thread.CurrentThread.CurrentUICulture" 可以让选择器的语言改变，仅支持中英文。
+* 颜色格式转换引用了 [ColorMine](https://github.com/muak/ColorMinePortable) 的 nuget
