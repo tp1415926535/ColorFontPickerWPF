@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ColorFontPickerWPF"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="OK">确定</system:String>
+    <system:String x:Key="Cancel">取消</system:String>
+    <system:String x:Key="Color">颜色</system:String>
+    <system:String x:Key="Font">字体</system:String>
+    <system:String x:Key="BasicColor">基本</system:String>
+    <system:String x:Key="SavedColor">自定</system:String>
+    <system:String x:Key="SaveCurrentColor">当前色添加到自定义</system:String>
+    <system:String x:Key="ScreentPickerTip">屏幕取色</system:String>
+    <system:String x:Key="FontFamily">字体：</system:String>
+    <system:String x:Key="FamilyTypeface">字形：</system:String>
+    <system:String x:Key="FontSize">字号：</system:String>
+    <system:String x:Key="TextDecoration">效果</system:String>
+    <system:String x:Key="Preview">预览</system:String>
+    <system:String x:Key="PreviewExample">示例</system:String>
+    <system:String x:Key="None">无</system:String>
+    <system:String x:Key="OverLine">上划线</system:String>
+    <system:String x:Key="Strikethrough">删除线</system:String>
+    <system:String x:Key="Baseline">基线</system:String>
+    <system:String x:Key="Underline">下划线</system:String>
+</ResourceDictionary>

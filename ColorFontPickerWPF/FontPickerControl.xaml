@@ -1,0 +1,173 @@
+﻿<UserControl x:Class="ColorFontPickerWPF.FontPickerControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ColorFontPickerWPF"
+             mc:Ignorable="d" Height="400" Width="500" Loaded="UserControl_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition MinHeight="80"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="0,0,0,5">
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="Margin" Value="5,2"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border>
+                    <TextBlock Text="{DynamicResource FontFamily}" FontWeight="Bold"/>
+                </Border>
+                <Border Grid.Column="1">
+                    <TextBlock Text="{DynamicResource FamilyTypeface}" FontWeight="Bold"/>
+                </Border>
+                <Border Grid.Column="2">
+                    <TextBlock Text="{DynamicResource FontSize}" FontWeight="Bold"/>
+                </Border>
+                <Border Grid.Row="1" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="FontTextbox"  Margin="0,0,0,5" HorizontalContentAlignment="Left" Text="{Binding ElementName=FontSelector,Path=SelectedItem}" TextChanged="FontTextbox_TextChanged"/>
+                        <ListBox x:Name="FontSelector" Grid.Row="1" ItemsSource="{x:Static Fonts.SystemFontFamilies}" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                             SelectedItem="{Binding SelectedFont.FontFamily, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectionChanged="FontSelector_SelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}" FontFamily="{Binding}" ToolTip="{Binding RelativeSource={RelativeSource Self},Path=Text}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="TypefaceTextbox"  Margin="0,0,0,5" HorizontalContentAlignment="Left" 
+                                 Text="{Binding ElementName=TypefaceSelector,Path=SelectedItem.AdjustedFaceNames[en-US]}" TextChanged="TypefaceTextbox_TextChanged"/>
+                        <ListBox x:Name="TypefaceSelector" Grid.Row="1"
+                                 ItemsSource="{Binding SelectedItem.FamilyTypefaces, ElementName=FontSelector}" 
+                                 DisplayMemberPath="AdjustedFaceNames[en-US]" SelectedIndex="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                             SelectedItem="{Binding SelectedFont.FamilyTypeface, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="2">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="SizeTextbox"  Margin="0,0,0,5" HorizontalContentAlignment="Left" TextChanged="SizeTextbox_TextChanged" MaxLength="3"/>
+                        <!--Text={Binding ElementName=SizeSelector,Path=SelectedItem,Converter={StaticResource TextToDoubleConverter}}" /> 单向绑定手动后失效，双向绑定实时更新-->
+                        <ListBox x:Name="SizeSelector" Grid.Row="1" DisplayMemberPath ="Key" SelectionChanged="SizeSelector_SelectionChanged" />
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.Style >
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding WithoutPreviewRow, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Value="True">
+                            <Setter Property="Height" Value="0"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid.Resources>
+                <Style TargetType="RadioButton">
+                    <Setter Property="Margin" Value="2"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="{DynamicResource TextDecoration}">
+                <GroupBox.Style>
+                    <Style TargetType="GroupBox">
+                        <Setter Property="Width" Value="auto"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding WithoutDecorations, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                <Setter Property="Width" Value="0"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </GroupBox.Style>
+                <StackPanel Margin="2">
+                    <StackPanel.Resources>
+                        <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
+                            <Setter Property="GroupName" Value="Line"/>
+                            <EventSetter  Event="Checked" Handler="DecorationRadio_Checked"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <RadioButton x:Name="NoLineRadio" Content="{DynamicResource None}" IsChecked="True"/>
+                    <RadioButton x:Name="OverLineRadio" Content="{DynamicResource  OverLine}"/>
+                    <RadioButton x:Name="StrikethroughRadio" Content="{DynamicResource Strikethrough}"/>
+                    <RadioButton x:Name="BaselineRadio" Content="{DynamicResource Baseline}"/>
+                    <RadioButton x:Name="UnderlineRadio" Content="{DynamicResource  Underline}"/>
+                </StackPanel>
+            </GroupBox>
+            <Grid Grid.Column="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <GroupBox Header="{DynamicResource Preview}" Grid.Column="0" Margin="0">
+                    <StackPanel Margin="2">
+                        <RadioButton x:Name="ChineseTextRadio" Content="中文" IsChecked="True" GroupName="Language"/>
+                        <RadioButton x:Name="EnglishTextRadio" Content="English" GroupName="Language"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="{DynamicResource PreviewExample}" Grid.Column="1" MinHeight="100" ClipToBounds="True" Margin="0">
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
+                               FontFamily="{Binding SelectedFont.FontFamily, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                               FontStretch="{Binding ElementName=TypefaceSelector,Path=SelectedItem.Stretch}"
+                               FontWeight="{Binding ElementName=TypefaceSelector,Path=SelectedItem.Weight}"
+                               FontStyle="{Binding ElementName=TypefaceSelector,Path=SelectedItem.Style}"
+                               FontSize="{Binding SelectedFont.FontSize, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                        <TextBlock.Style >
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Text" Value="字体选择"/>
+                                <Setter Property="TextDecorations" Value="None"/>
+                                <Style.Triggers >
+                                    <DataTrigger Binding="{Binding ElementName=EnglishTextRadio,Path=IsChecked}" Value="True">
+                                        <Setter Property="Text" Value="Font Picker"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=OverLineRadio,Path=IsChecked}" Value="True">
+                                        <Setter Property="TextDecorations" Value="OverLine"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=StrikethroughRadio,Path=IsChecked}" Value="True">
+                                        <Setter Property="TextDecorations" Value="Strikethrough"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=BaselineRadio,Path=IsChecked}" Value="True">
+                                        <Setter Property="TextDecorations" Value="Baseline"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=UnderlineRadio,Path=IsChecked}" Value="True">
+                                        <Setter Property="TextDecorations" Value="Underline"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </GroupBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
