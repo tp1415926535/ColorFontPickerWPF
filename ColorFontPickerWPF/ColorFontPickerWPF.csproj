@@ -10,6 +10,7 @@
     <PackageProjectUrl>https://github.com/tp1415926535/ColorFontPickerWPF</PackageProjectUrl>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
