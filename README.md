@@ -188,7 +188,7 @@ xmlns:cf="clr-namespace:ColorFontPickerWPF;assembly=ColorFontPickerWPF"
 using ColorFontPickerWPF;
 
 var colorPicker = new ColorPickerControl();
-//colorPicker.SelectedColor = Colors.Red; //In need
+//colorPicker.SelectedColor = Colors.Red; //如果需要显示当前值
 grid.Children.Add(colorPicker);
 ```
 
@@ -199,7 +199,7 @@ grid.Children.Add(colorPicker);
 using ColorFontPickerWPF;
 
 FontDialog fontDialog = new FontDialog();
-//fontDialog.GetFont(textBlock); //In need
+//fontDialog.GetFont(textBlock); //如果需要显示当前值
 if (fontDialog.ShowDialog() == true)
     fontDialog.SetFont(textBlock);
 ```
@@ -229,14 +229,14 @@ xmlns:cf="clr-namespace:ColorFontPickerWPF;assembly=ColorFontPickerWPF"
 using ColorFontPickerWPF;
 
 var fontPicker = new FontPickerControl();
-/*//In need
+/*//如果需要显示当前值
 fontPicker.SelectedFont = new Font()
 { 
     FontFamily = new FontFamily("Microsoft YaHei UI"), 
     FamilyTypeface = new FamilyTypeface(),
     FontSize = 12
 }; 
-//fontPicker.Get(textBlock);// or get font from control
+//fontPicker.Get(textBlock);//或者用封装的方法直接获取控件字体
 */
 grid.Children.Add(fontPicker);
 ```
