@@ -31,7 +31,7 @@ namespace ColorFontPickerWPF
         {
             if (cultureInfo.Name.Length >= 2)
             {
-                var lan = cultureInfo.Name.Substring(0, 2);
+                var lan = cultureInfo.Name.Substring(0, 2).ToLower();
                 if (!languages.ContainsKey(lan))
                     SwitchToExist("en");
                 else
