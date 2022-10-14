@@ -7,7 +7,13 @@ The interface displays Chinese or English depending on the thread.
 为WPF打造的颜色选择器和字体选择器附加功能。    
 包括颜色对话框、颜色选择控件、字体对话框、字体选择控件。    
 对话框沿用Winform的设计，控件可以直接在xaml中插入并支持折叠。    
-界面根据线程显示中文或英文。      
+界面根据线程显示中文或英文。   
+    
+ColorDialog:    
+![ColorDialog](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorDialog.jpg)       
+     
+FontDialog:     
+![FontDialog](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontDialog.jpg)      
       
 [![release](https://img.shields.io/static/v1?label=release&message=1.0.0&color=green&logo=github)](https://github.com/tp1415926535/ColorFontPickerWPF/releases) 
 [![nuget](https://img.shields.io/static/v1?label=nuget&message=1.0.0&color=lightblue&logo=nuget)](https://www.nuget.org/packages/ColorFontPickerWPF) 
@@ -34,6 +40,12 @@ if (colorDialog.ShowDialog() == true)
 ```
 
 #### ColorPickerControl  
+ColorPickerControl-Style1:    
+![ColorPickerControl](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorPickerControl.jpg)  
+     
+ColorPickerControl-Style2:    
+![ColorPickerControl2](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorPickerControl2.jpg)      
+
 Additional Property **"SelectedColor"** can be get and set.    
 Additional Property **"WithoutColorCells"** can collapse the left interface when True.   
 
@@ -66,6 +78,15 @@ if (fontDialog.ShowDialog() == true)
 ```
 
 #### FontPickerControl  
+FontPickerControl-style1:     
+![FontPickerControl](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontPickerControl.jpg)  
+     
+FontPickerControl-style2:     
+![FontPickerControl2](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontPickerControl2.jpg)  
+     
+FontPickerControl-style3:     
+![FontPickerControl3](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontPickerControl3.jpg)     
+
 Additional Property **"SelectedFont"** can be get and set.    
 Additional Property **"WithoutDecorations"** and **"WithoutPreviewRow"** can collapse corresponding area when True.    
 
@@ -117,11 +138,17 @@ public enum TextDecorationType
 ``` 
 You can handle **SelectedFont** yourself, or use a wrapped method to "fontDialog.GetFont()", "fontPickerControl.GetFont()",
 or "fontDialog.SetFont()", "fontPickerControl.SetFont()" directly.
-   
-     
+* Change "System.Threading.Thread.CurrentThread.CurrentUICulture" can make the picker Language changed. Only support Chinese and English.
+* The color format conversion references the [ColorMine](https://github.com/muak/ColorMinePortable) nuget
+
 ---
    
-# 中文说明
+# 中文说明   
+颜色对话框：     
+![颜色对话框](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E9%A2%9C%E8%89%B2%E5%AF%B9%E8%AF%9D%E6%A1%86.jpg)       
+         
+字体对话框：     
+![字体对话框](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E5%AF%B9%E8%AF%9D%E6%A1%86.jpg)      
 
 ## 使用   
 从Nuget下载包，或者引用Release中的dll。   
@@ -134,12 +161,18 @@ or "fontDialog.SetFont()", "fontPickerControl.SetFont()" directly.
 using ColorFontPickerWPF;
 
 ColorDialog colorDialog = new ColorDialog();
-//colorDialog.SelectedColor = ((SolidColorBrush)label.Background).Color; //In need
+//colorDialog.SelectedColor = ((SolidColorBrush)label.Background).Color; //如果需要显示当前值
 if (colorDialog.ShowDialog() == true)
     label.Background = new SolidColorBrush(colorDialog.SelectedColor);
 ```
 
 #### 颜色选择控件（ColorPickerControl） 
+颜色选择控件-样式1：           
+![颜色选择控件1](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E9%A2%9C%E8%89%B2%E9%80%89%E6%8B%A9%E6%8E%A7%E4%BB%B6.jpg)  
+          
+颜色选择控件-样式2：           
+![颜色选择控件2](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E9%A2%9C%E8%89%B2%E9%80%89%E6%8B%A9%E6%8E%A7%E4%BB%B62.jpg)      
+
 附加属性“SelectedColor”（选择的颜色）可以设置和获取。   
 附加属性“WithoutColorCells”（不要颜色格子）为True的时候可以折叠左边部分。    
 
@@ -155,23 +188,32 @@ xmlns:cf="clr-namespace:ColorFontPickerWPF;assembly=ColorFontPickerWPF"
 using ColorFontPickerWPF;
 
 var colorPicker = new ColorPickerControl();
-//colorPicker.SelectedColor = Colors.Red; //In need
+//colorPicker.SelectedColor = Colors.Red; //如果需要显示当前值
 grid.Children.Add(colorPicker);
 ```
 
 ### 字体
-#### 字体对话框
+#### 字体对话框（FontDialog）
 为了更便于使用，字体提供了获取和设置的封装方法：
 ```c#
 using ColorFontPickerWPF;
 
 FontDialog fontDialog = new FontDialog();
-//fontDialog.GetFont(textBlock); //In need
+//fontDialog.GetFont(textBlock); //如果需要显示当前值
 if (fontDialog.ShowDialog() == true)
     fontDialog.SetFont(textBlock);
 ```
 
 #### 字体选择控件（FontPickerControl） 
+字体选择控件-样式1：    
+![字体选择控件1](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E9%80%89%E6%8B%A9%E6%8E%A7%E4%BB%B6.jpg)  
+            
+字体选择控件-样式2：    
+![字体选择控件2](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E9%80%89%E6%8B%A9%E6%8E%A7%E4%BB%B62.jpg)  
+             
+字体选择控件-样式3：    
+![字体选择控件3](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E9%80%89%E6%8B%A9%E6%8E%A7%E4%BB%B63.jpg)     
+
 附加属性 “SelectedFont”（选择的字体）可以获取和设置。    
 附加属性 “WithoutDecorations”（不要装饰线设置）和 “WithoutPreviewRow” （不要预览行）值为True的时候可以折叠对应区域。     
 
@@ -187,14 +229,14 @@ xmlns:cf="clr-namespace:ColorFontPickerWPF;assembly=ColorFontPickerWPF"
 using ColorFontPickerWPF;
 
 var fontPicker = new FontPickerControl();
-/*//In need
+/*//如果需要显示当前值
 fontPicker.SelectedFont = new Font()
 { 
     FontFamily = new FontFamily("Microsoft YaHei UI"), 
     FamilyTypeface = new FamilyTypeface(),
     FontSize = 12
 }; 
-//fontPicker.Get(textBlock);// or get font from control
+//fontPicker.Get(textBlock);//或者用封装的方法直接获取控件字体
 */
 grid.Children.Add(fontPicker);
 ```
@@ -222,4 +264,6 @@ public enum TextDecorationType
 }
 ``` 
 你可以自行处理 “SelectedFont” 的值，或者直接使用封装的方法"fontDialog.GetFont()", "fontPickerControl.GetFont()",
-or "fontDialog.SetFont()", "fontPickerControl.SetFont()"。
+或者 "fontDialog.SetFont()", "fontPickerControl.SetFont()"。
+* 设置 "System.Threading.Thread.CurrentThread.CurrentUICulture" 可以让选择器的语言改变，仅支持中英文。
+* 颜色格式转换引用了 [ColorMine](https://github.com/muak/ColorMinePortable) 的 nuget包。
