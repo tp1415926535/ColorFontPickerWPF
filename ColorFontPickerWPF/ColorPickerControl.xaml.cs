@@ -1,4 +1,4 @@
-﻿using ColorMine.ColorSpaces;
+﻿//using ColorMine.ColorSpaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -73,7 +73,7 @@ namespace ColorFontPickerWPF
             for (int i = 0; i < 8; i++)
                 saveColors.Add(Colors.White);
 
-            LanguageManager.SwitchLanguage(System.Threading.Thread.CurrentThread.CurrentUICulture.Name);
+            PickerLanguageManager.SwitchLanguage(System.Threading.Thread.CurrentThread.CurrentUICulture);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -101,12 +101,12 @@ namespace ColorFontPickerWPF
                 var grid = (Grid)sender;
                 Point position = e.GetPosition(grid);
 
-                HSL hsl = new RGB(SelectedColor.R, SelectedColor.G, SelectedColor.B).ToRgb().To<Hsl>().ToHSL();
+                HSL hsl = new RGB(SelectedColor.R, SelectedColor.G, SelectedColor.B).ToHSL();
                 hsl.H = (int)Math.Round(position.X / grid.ActualWidth * 360);
                 hsl.S = (int)Math.Round((1 - position.Y / grid.ActualHeight) * 100);
                 HSLH.Text = hsl.H.ToString();
                 HSLS.Text = hsl.S.ToString();
-                Rgb rgb = hsl.ToHsl().To<Rgb>();
+                RGB rgb = hsl.ToRGB();
                 SelectedColor = rgb.ToColor();
 
                 PickerPath.Margin = new Thickness(position.X - 5, position.Y - 5, 0, 0);
@@ -196,8 +196,7 @@ namespace ColorFontPickerWPF
             try
             {
                 TextBox textbox = sender as TextBox;
-                Hsl hsl = new RGB(SelectedColor.R, SelectedColor.G, SelectedColor.B).ToRgb().To<Hsl>();
-                Rgb rgb;
+                HSL hsl = new RGB(SelectedColor.R, SelectedColor.G, SelectedColor.B).ToHSL();
                 switch (textbox.Name)
                 {
                     case "HSLH":
@@ -210,7 +209,7 @@ namespace ColorFontPickerWPF
                         hsl.L = (byte)int.Parse(textbox.Text);
                         break;
                 }
-                rgb = hsl.To<Rgb>();
+                RGB rgb = hsl.ToRGB();
                 SelectedColor = rgb.ToColor();
 
                 ApplyChangeToText(ColorFormat.HSL);
@@ -225,7 +224,7 @@ namespace ColorFontPickerWPF
             try
             {
                 TextBox textbox = sender as TextBox;
-                Rgb rgb = new Hex(textbox.Text).To<Rgb>();
+                RGB rgb = new HEX(textbox.Text).ToRGB();
                 SelectedColor = rgb.ToColor();
 
                 ApplyChangeToText(ColorFormat.HEX);
@@ -240,13 +239,13 @@ namespace ColorFontPickerWPF
                 changing = false;
                 return;
             }
-            Rgb rgb = new RGB(SelectedColor.R, SelectedColor.G, SelectedColor.B).ToRgb();
+            RGB rgb = new RGB(SelectedColor.R, SelectedColor.G, SelectedColor.B);
             try
             {
                 switch (fromColorFormat)
                 {
                     case ColorFormat.HSL:
-                        rgb = new HSL(int.Parse(HSLH.Text), byte.Parse(HSLS.Text), byte.Parse(HSLL.Text)).ToRgb();
+                        rgb = new HSL(int.Parse(HSLH.Text), byte.Parse(HSLS.Text), byte.Parse(HSLL.Text)).ToRGB();
                         break;
                 }
                 SelectedColor = rgb.ToColor();
@@ -255,21 +254,20 @@ namespace ColorFontPickerWPF
 
             if (fromColorFormat != ColorFormat.RGB)
             {
-                RGB rGB = rgb.ToRGB();
-                RGBR.Text = rGB.R.ToString();
-                RGBG.Text = rGB.G.ToString();
-                RGBB.Text = rGB.B.ToString();
+                RGBR.Text = rgb.R.ToString();
+                RGBG.Text = rgb.G.ToString();
+                RGBB.Text = rgb.B.ToString();
             }
             if (fromColorFormat != ColorFormat.HSL && fromColorFormat != ColorFormat.Picker)
             {
-                HSL hsl = rgb.To<Hsl>().ToHSL();
+                HSL hsl = rgb.ToHSL();
                 HSLH.Text = hsl.H.ToString();
                 HSLS.Text = hsl.S.ToString();
                 HSLL.Text = hsl.L.ToString();
             }
             if (fromColorFormat != ColorFormat.HEX)
             {
-                Hex hex = rgb.To<Hex>();
+                HEX hex = rgb.ToHEX();
                 HEXTextbox.Text = hex.Code;
             }
             if (fromColorFormat != ColorFormat.Picker)
@@ -324,16 +322,16 @@ namespace ColorFontPickerWPF
             else
             {
                 Color color = (Color)value;
-                HSL hsl = new RGB(color.R, color.G, color.B).ToRgb().To<Hsl>().ToHSL();
+                HSL hsl = new RGB(color.R, color.G, color.B).ToHSL();
                 string param = (string)parameter;
-                Rgb rgb;
+                RGB rgb;
                 switch (param)
                 {
                     case "Top":
-                        rgb = new HSL(hsl.H, hsl.S, 100).ToRgb();
+                        rgb = new HSL(hsl.H, hsl.S, 100).ToRGB();
                         break;
                     case "Bottom":
-                        rgb = new HSL(hsl.H, hsl.S, 0).ToRgb();
+                        rgb = new HSL(hsl.H, hsl.S, 0).ToRGB();
                         break;
                     default:
                         return Colors.Transparent;

@@ -24,8 +24,8 @@ namespace DemoNETCore
     {
         public MainWindow()
         {
-            //System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             InitializeComponent();
+            //PickerLanguageManager.SwitchLanguage(new CultureInfo("de-AT"));
         }
 
         private void ColorDialogButton_Click(object sender, RoutedEventArgs e)

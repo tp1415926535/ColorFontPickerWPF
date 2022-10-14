@@ -125,17 +125,34 @@
                 </StackPanel>
             </GroupBox>
             <Grid Grid.Column="1" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <GroupBox Header="{DynamicResource Preview}" Grid.Column="0" Margin="0">
-                    <StackPanel Margin="2">
-                        <RadioButton x:Name="ChineseTextRadio" Content="中文" IsChecked="True" GroupName="Language"/>
-                        <RadioButton x:Name="EnglishTextRadio" Content="English" GroupName="Language"/>
-                    </StackPanel>
-                </GroupBox>
-                <GroupBox Header="{DynamicResource PreviewExample}" Grid.Column="1" MinHeight="100" ClipToBounds="True" Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid  Grid.Row="0" Margin="9,2,2,2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{DynamicResource Preview}" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="LanguageCombo" Grid.Column="1" SelectedIndex="0">
+                        <ComboBoxItem Content="中文" Tag="zh"/>
+                        <ComboBoxItem Content="English" Tag="en"/>
+                        <ComboBoxItem Content="بالعربية" Tag="ar"/>
+                        <ComboBoxItem Content="Česky" Tag="cs"/>
+                        <ComboBoxItem Content="Deutsch" Tag="de"/>
+                        <ComboBoxItem Content="Español" Tag="es"/>
+                        <ComboBoxItem Content="Français" Tag="fr"/>
+                        <ComboBoxItem Content="Magyar" Tag="hu"/>
+                        <ComboBoxItem Content="Italiano" Tag="it"/>
+                        <ComboBoxItem Content="やまと" Tag="ja"/>
+                        <ComboBoxItem Content="Português" Tag="pt"/>
+                        <ComboBoxItem Content="Românesc" Tag="ro"/>
+                        <ComboBoxItem Content="Русский" Tag="ru"/>
+                        <ComboBoxItem Content="Svenska" Tag="sv"/>
+                    </ComboBox>
+                </Grid>
+                <GroupBox Header="{DynamicResource PreviewExample}" Grid.Row="1" MinHeight="100" ClipToBounds="True" Margin="0">
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
                                FontFamily="{Binding SelectedFont.FontFamily, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                FontStretch="{Binding ElementName=TypefaceSelector,Path=SelectedItem.Stretch}"
@@ -147,9 +164,46 @@
                                 <Setter Property="Text" Value="字体选择"/>
                                 <Setter Property="TextDecorations" Value="None"/>
                                 <Style.Triggers >
-                                    <DataTrigger Binding="{Binding ElementName=EnglishTextRadio,Path=IsChecked}" Value="True">
+                                    <DataTrigger Binding="{Binding ElementName=LanguageCombo,Path=SelectedItem.Tag}" Value="en">
                                         <Setter Property="Text" Value="Font Picker"/>
                                     </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=LanguageCombo,Path=SelectedItem.Tag}" Value="ar">
+                                        <Setter Property="Text" Value="اختيار الخط"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=LanguageCombo,Path=SelectedItem.Tag}" Value="cs">
+                                        <Setter Property="Text" Value="Výběr písma"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=LanguageCombo,Path=SelectedItem.Tag}" Value="de">
+                                        <Setter Property="Text" Value="Auswahl der Schriftart"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=LanguageCombo,Path=SelectedItem.Tag}" Value="es">
+                                        <Setter Property="Text" Value="Selección de fuentes"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=LanguageCombo,Path=SelectedItem.Tag}" Value="fr">
+                                        <Setter Property="Text" Value="Sélection de la police"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=LanguageCombo,Path=SelectedItem.Tag}" Value="hu">
+                                        <Setter Property="Text" Value="Betűtípus kiválasztása"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=LanguageCombo,Path=SelectedItem.Tag}" Value="it">
+                                        <Setter Property="Text" Value="Selezione del carattere"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=LanguageCombo,Path=SelectedItem.Tag}" Value="ja">
+                                        <Setter Property="Text" Value="フォントの選択"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=LanguageCombo,Path=SelectedItem.Tag}" Value="pt">
+                                        <Setter Property="Text" Value="Selecção da fonte"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=LanguageCombo,Path=SelectedItem.Tag}" Value="ro">
+                                        <Setter Property="Text" Value="Selectarea fontului"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=LanguageCombo,Path=SelectedItem.Tag}" Value="ru">
+                                        <Setter Property="Text" Value="Выбор шрифта"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ElementName=LanguageCombo,Path=SelectedItem.Tag}" Value="sv">
+                                        <Setter Property="Text" Value="Val av typsnitt"/>
+                                    </DataTrigger>
+                                    
                                     <DataTrigger Binding="{Binding ElementName=OverLineRadio,Path=IsChecked}" Value="True">
                                         <Setter Property="TextDecorations" Value="OverLine"/>
                                     </DataTrigger>

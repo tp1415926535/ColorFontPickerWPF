@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ColorFontPickerWPF.Language"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="OK">OK</system:String>
+    <system:String x:Key="Cancel">キャンセル</system:String>
+    <system:String x:Key="Color">カラー</system:String>
+    <system:String x:Key="Font">フォント</system:String>
+    <system:String x:Key="BasicColor">基本色</system:String>
+    <system:String x:Key="SavedColor">保存色</system:String>
+    <system:String x:Key="SaveCurrentColor">現在の色を保存</system:String>
+    <system:String x:Key="ScreenPickerTip">画面からの選択</system:String>
+    <system:String x:Key="FontFamily">フォントファミリ:</system:String>
+    <system:String x:Key="FamilyTypeface">ファミリー書体:</system:String>
+    <system:String x:Key="FontSize">文字サイズ(FontSize)</system:String>
+    <system:String x:Key="TextDecoration">文字装飾</system:String>
+    <system:String x:Key="Preview">プレビュー</system:String>
+    <system:String x:Key="PreviewExample">表示例</system:String>
+    <system:String x:Key="None">なし</system:String>
+    <system:String x:Key="OverLine">オーバーライン</system:String>
+    <system:String x:Key="Strikethrough">取り消し線</system:String>
+    <system:String x:Key="Baseline">ベースライン</system:String>
+    <system:String x:Key="Underline">アンダーライン</system:String>
+</ResourceDictionary>

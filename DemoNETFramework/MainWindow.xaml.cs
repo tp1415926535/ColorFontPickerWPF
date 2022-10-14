@@ -23,8 +23,8 @@ namespace DemoNETFramework
     {
         public MainWindow()
         {
-            //System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
             InitializeComponent();
+            //PickerLanguageManager.SwitchLanguage(new System.Globalization.CultureInfo("en-US"));
         }
 
         private void ColorDialogButton_Click(object sender, RoutedEventArgs e)

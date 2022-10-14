@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ColorFontPickerWPF.Language"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="OK">OK</system:String>
+    <system:String x:Key="Cancel">Avbryt</system:String>
+    <system:String x:Key="Color">Färg</system:String>
+    <system:String x:Key="Font">Typsnitt</system:String>
+    <system:String x:Key="BasicColor">BasicColor</system:String>
+    <system:String x:Key="SavedColor">Sparad färg</system:String>
+    <system:String x:Key="SaveCurrentColor">SaveCurrentColor</system:String>
+    <system:String x:Key="ScreenPickerTip">PickFromScreen</system:String>
+    <system:String x:Key="FontFamily">FontFamily :</system:String>
+    <system:String x:Key="FamilyTypeface">FamilyTypeface :</system:String>
+    <system:String x:Key="FontSize">FontSize :</system:String>
+    <system:String x:Key="TextDecoration">TextDecoration</system:String>
+    <system:String x:Key="Preview">Förhandsgranskning</system:String>
+    <system:String x:Key="PreviewExample">Exempel</system:String>
+    <system:String x:Key="None">Ingen</system:String>
+    <system:String x:Key="OverLine">OverLine</system:String>
+    <system:String x:Key="Strikethrough">Genomstrykning</system:String>
+    <system:String x:Key="Baseline">Grundlinje</system:String>
+    <system:String x:Key="Underline">Understrykning</system:String>
+</ResourceDictionary>

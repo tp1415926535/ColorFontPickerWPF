@@ -60,11 +60,21 @@ namespace ColorFontPickerWPF
             FontSelector.ItemsSource = list;
             SizeSelector.ItemsSource = fontSizeDic;
 
-            LanguageManager.SwitchLanguage(System.Threading.Thread.CurrentThread.CurrentUICulture.Name);
-            if (System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLower().StartsWith("zh"))
-                ChineseTextRadio.IsChecked = true;
-            else
-                EnglishTextRadio.IsChecked = true;
+            PickerLanguageManager.SwitchLanguage(System.Threading.Thread.CurrentThread.CurrentUICulture);
+            try
+            {
+                string lan = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLower().Substring(0, 2);
+                for (int i = 0; i < LanguageCombo.Items.Count; i++)
+                {
+                    ComboBoxItem comboBoxItem = LanguageCombo.Items[i] as ComboBoxItem;
+                    if (comboBoxItem.Tag.ToString().Equals(lan))
+                    {
+                        LanguageCombo.SelectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            catch { }
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -73,6 +83,8 @@ namespace ColorFontPickerWPF
             if (SelectedFont == null)
                 SelectedFont = defaultFont;
             SizeSelector.SelectedItem = fontSizeDic.FirstOrDefault(x => x.Value.Equals(SelectedFont.FontSize));
+            if (SizeSelector.SelectedItem == null)
+                SizeTextbox.Text = SelectedFont.FontSize.ToString();
             switch (SelectedFont.TextDecorationType)
             {
                 case TextDecorationType.None:
@@ -110,6 +122,7 @@ namespace ColorFontPickerWPF
         private void FontTextbox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(FontTextbox.Text)) return;
+            if (FontSelector.SelectedItem == null) return;
             if (FontTextbox.Text.Equals(FontSelector.SelectedItem.ToString())) return;
             bool matchedStart = false;
             foreach (var item in FontSelector.Items)
@@ -131,6 +144,7 @@ namespace ColorFontPickerWPF
         private void TypefaceTextbox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(TypefaceTextbox.Text)) return;
+            if (TypefaceSelector.SelectedItem == null) return;
             if (TypefaceTextbox.Text.Equals(TypefaceSelector.SelectedItem.ToString())) return;
             var language = XmlLanguage.GetLanguage("en-US");
             bool matchedStart = false;
@@ -152,6 +166,7 @@ namespace ColorFontPickerWPF
         private void SizeTextbox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(SizeTextbox.Text)) return;
+            if (SizeSelector.SelectedItem == null) return;
             if (SizeTextbox.Text.Equals(((KeyValuePair<string, double>)SizeSelector.SelectedItem).Key)) return;
 
             double value = 0;

@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ColorFontPickerWPF.Language"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="OK">OK</system:String>
+    <system:String x:Key="Cancel">Anulare</system:String>
+    <system:String x:Key="Color">Culoare</system:String>
+    <system:String x:Key="Font">Font</system:String>
+    <system:String x:Key="BasicColor">BasicColor</system:String>
+    <system:String x:Key="SavedColor">SavedColor</system:String>
+    <system:String x:Key="SaveCurrentColor">SaveCurrentColor</system:String>
+    <system:String x:Key="ScreenPickerTip">PickFromScreen</system:String>
+    <system:String x:Key="FontFamily">FontFamily :</system:String>
+    <system:String x:Key="FamilyTypeface">FamilieTypeface :</system:String>
+    <system:String x:Key="FontSize">FontSize :</system:String>
+    <system:String x:Key="TextDecoration">TextDecoration</system:String>
+    <system:String x:Key="Preview">Previzualizare</system:String>
+    <system:String x:Key="PreviewExample">Exemplu</system:String>
+    <system:String x:Key="None">Nici unul</system:String>
+    <system:String x:Key="OverLine">OverLine</system:String>
+    <system:String x:Key="Strikethrough">Strikethrough</system:String>
+    <system:String x:Key="Baseline">Linia de bază</system:String>
+    <system:String x:Key="Underline">Subliniere</system:String>
+</ResourceDictionary>

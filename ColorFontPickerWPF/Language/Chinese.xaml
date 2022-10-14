@@ -9,7 +9,7 @@
     <system:String x:Key="BasicColor">基本</system:String>
     <system:String x:Key="SavedColor">自定</system:String>
     <system:String x:Key="SaveCurrentColor">当前色添加到自定义</system:String>
-    <system:String x:Key="ScreentPickerTip">屏幕取色</system:String>
+    <system:String x:Key="ScreenPickerTip">屏幕取色</system:String>
     <system:String x:Key="FontFamily">字体：</system:String>
     <system:String x:Key="FamilyTypeface">字形：</system:String>
     <system:String x:Key="FontSize">字号：</system:String>

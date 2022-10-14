@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ColorFontPickerWPF.Language"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="OK">OK</system:String>
+    <system:String x:Key="Cancel">Отменить</system:String>
+    <system:String x:Key="Color">Цвет</system:String>
+    <system:String x:Key="Font">Шрифт</system:String>
+    <system:String x:Key="BasicColor">ОсновнойЦвет</system:String>
+    <system:String x:Key="SavedColor">СохраненныйЦвет</system:String>
+    <system:String x:Key="SaveCurrentColor">SaveCurrentColor</system:String>
+    <system:String x:Key="ScreenPickerTip">PickFromScreen</system:String>
+    <system:String x:Key="FontFamily">FontFamily :</system:String>
+    <system:String x:Key="FamilyTypeface">FamilyTypeface :</system:String>
+    <system:String x:Key="FontSize">Размер шрифта :</system:String>
+    <system:String x:Key="TextDecoration">TextDecoration</system:String>
+    <system:String x:Key="Preview">Предварительный просмотр</system:String>
+    <system:String x:Key="PreviewExample">Пример</system:String>
+    <system:String x:Key="None">Нет</system:String>
+    <system:String x:Key="OverLine">OverLine</system:String>
+    <system:String x:Key="Strikethrough">Зачеркивание</system:String>
+    <system:String x:Key="Baseline">Базовая линия</system:String>
+    <system:String x:Key="Underline">Подчеркивание</system:String>
+</ResourceDictionary>

@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ColorFontPickerWPF.Language"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    <system:String x:Key="OK">حسناً</system:String>
+    <system:String x:Key="Cancel">ألغى</system:String>
+    <system:String x:Key="Color">الألوان</system:String>
+    <system:String x:Key="Font">فونت</system:String>
+    <system:String x:Key="BasicColor">الألوان الأساسية</system:String>
+    <system:String x:Key="SavedColor">حفظ الألوان</system:String>
+    <system:String x:Key="SaveCurrentColor">حفظ اللون الحالي</system:String>
+    <system:String x:Key="ScreenPickerTip">اختيار من الشاشة</system:String>
+    <system:String x:Key="FontFamily">فونت</system:String>
+    <system:String x:Key="FamilyTypeface">سلسلة الخط</system:String>
+    <system:String x:Key="FontSize">حجم الخط</system:String>
+    <system:String x:Key="TextDecoration">نص الديكور</system:String>
+    <system:String x:Key="Preview">معاينة</system:String>
+    <system:String x:Key="PreviewExample">على سبيل المثال</system:String>
+    <system:String x:Key="None">لا أحد</system:String>
+    <system:String x:Key="OverLine">اون لاين</system:String>
+    <system:String x:Key="Strikethrough">حذف خط</system:String>
+    <system:String x:Key="Baseline">خط الأساس</system:String>
+    <system:String x:Key="Underline">التأكيد</system:String>
+</ResourceDictionary>
