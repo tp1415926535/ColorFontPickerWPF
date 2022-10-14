@@ -193,7 +193,7 @@ grid.Children.Add(colorPicker);
 ```
 
 ### 字体
-#### 字体对话框
+#### 字体对话框（FontDialog）
 为了更便于使用，字体提供了获取和设置的封装方法：
 ```c#
 using ColorFontPickerWPF;
