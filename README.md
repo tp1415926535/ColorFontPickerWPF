@@ -2,12 +2,12 @@
 Color picker and font picker add-ons built for WPF.     
 Includes **ColorDialog**, **ColorPickerControl**, **FontDialog**, **FontPickerControl**.    
 Dialogs follow Winform design, controls can be added directly in xaml and support collapsing.     
-The interface displays Chinese or English depending on the thread.    
+The interface automatically displays the corresponding language according to the threads, the localization includes 14 languages.     
 
 为WPF打造的颜色选择器和字体选择器附加功能。    
 包括颜色对话框、颜色选择控件、字体对话框、字体选择控件。    
 对话框沿用Winform的设计，控件可以直接在xaml中插入并支持折叠。    
-界面根据线程显示中文或英文。   
+界面根据线程自动显示对应语言，本地化包括14种语言。   
     
 ColorDialog:    
 ![ColorDialog](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorDialog.jpg)       
@@ -15,8 +15,8 @@ ColorDialog:
 FontDialog:     
 ![FontDialog](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontDialog.jpg)      
       
-[![release](https://img.shields.io/static/v1?label=release&message=1.0.0&color=green&logo=github)](https://github.com/tp1415926535/ColorFontPickerWPF/releases) 
-[![nuget](https://img.shields.io/static/v1?label=nuget&message=1.0.0&color=lightblue&logo=nuget)](https://www.nuget.org/packages/ColorFontPickerWPF) 
+[![release](https://img.shields.io/static/v1?label=release&message=1.0.1&color=green&logo=github)](https://github.com/tp1415926535/ColorFontPickerWPF/releases) 
+[![nuget](https://img.shields.io/static/v1?label=nuget&message=1.0.1&color=lightblue&logo=nuget)](https://www.nuget.org/packages/ColorFontPickerWPF) 
 [![license](https://img.shields.io/static/v1?label=license&message=MIT&color=silver)](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/LICENSE) 
 ![C#](https://img.shields.io/github/languages/top/tp1415926535/ColorFontPickerWPF)        
 
@@ -138,9 +138,18 @@ public enum TextDecorationType
 ``` 
 You can handle **SelectedFont** yourself, or use a wrapped method to "fontDialog.GetFont()", "fontPickerControl.GetFont()",
 or "fontDialog.SetFont()", "fontPickerControl.SetFont()" directly.
-* Change "System.Threading.Thread.CurrentThread.CurrentUICulture" can make the picker Language changed. Only support Chinese and English.
-* The color format conversion references the [ColorMine](https://github.com/muak/ColorMinePortable) nuget
+* The interface language is displayed automatically according to the current thread, or you can specify the interface **language manually**:
+```c#
+using ColorFontPickerWPF;
 
+FontDialog fontDialog = new FontDialog();
+PickerLanguageManager.SwitchLanguage(new CultureInfo("zh-CN"));
+```   
+14 languages are currently supported, including: Chinese, English, Arabic, Czech, German, Spanish, French, Hungarian, Italian, Japanese, Portuguese, Romanian, Russian, and Swedish.    
+
+## Version   
+* v1.0.1 2022/10/14 Removed the use of color library, color conversion was changed to self-implemented. Fixed bugs in font dialog. added multi-language support, expanded from 2 to 14 languages.    
+* v1.0.0 2022/10/13 Basic features. Dialogs and selection controls.   
 ---
    
 # 中文说明   
@@ -264,6 +273,16 @@ public enum TextDecorationType
 }
 ``` 
 你可以自行处理 “SelectedFont” 的值，或者直接使用封装的方法"fontDialog.GetFont()", "fontPickerControl.GetFont()",
-或者 "fontDialog.SetFont()", "fontPickerControl.SetFont()"。
-* 设置 "System.Threading.Thread.CurrentThread.CurrentUICulture" 可以让选择器的语言改变，仅支持中英文。
-* 颜色格式转换引用了 [ColorMine](https://github.com/muak/ColorMinePortable) 的 nuget包。
+或者 "fontDialog.SetFont()", "fontPickerControl.SetFont()"。   
+* 界面语言根据当前线程自动显示，你也可以手动指定界面语言：
+```c#
+using ColorFontPickerWPF;
+
+FontDialog fontDialog = new FontDialog();
+PickerLanguageManager.SwitchLanguage(new CultureInfo("zh-CN"));
+```   
+目前支持14种语言，包括：中文，英语，阿拉伯语，捷克语，德语，西班牙语，法语，匈牙利语，意大利语，日语，葡萄牙语，罗马尼亚语，俄语，瑞典语。    
+
+## 版本   
+* v1.0.1 2022/10/14 移除了对颜色库的使用，颜色转换改为自行实现。字体对话框修复bug。新增多语言支持，从2种语言扩展到14种。    
+* v1.0.0 2022/10/13 基本功能。对话框和选择控件。    
