@@ -161,7 +161,7 @@ or "fontDialog.SetFont()", "fontPickerControl.SetFont()" directly.
 using ColorFontPickerWPF;
 
 ColorDialog colorDialog = new ColorDialog();
-//colorDialog.SelectedColor = ((SolidColorBrush)label.Background).Color; //In need
+//colorDialog.SelectedColor = ((SolidColorBrush)label.Background).Color; //如果需要显示当前值
 if (colorDialog.ShowDialog() == true)
     label.Background = new SolidColorBrush(colorDialog.SelectedColor);
 ```
