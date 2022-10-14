@@ -168,10 +168,10 @@ if (colorDialog.ShowDialog() == true)
 
 #### 颜色选择控件（ColorPickerControl） 
 颜色选择控件-样式1：           
-![ColorPickerControl](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorPickerControl.jpg)  
+![颜色选择控件1](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E9%A2%9C%E8%89%B2%E9%80%89%E6%8B%A9%E6%8E%A7%E4%BB%B6.jpg)  
           
 颜色选择控件-样式2：           
-![ColorPickerControl2](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorPickerControl2.jpg)      
+![颜色选择控件2](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E9%A2%9C%E8%89%B2%E9%80%89%E6%8B%A9%E6%8E%A7%E4%BB%B62.jpg)      
 
 附加属性“SelectedColor”（选择的颜色）可以设置和获取。   
 附加属性“WithoutColorCells”（不要颜色格子）为True的时候可以折叠左边部分。    
@@ -206,13 +206,13 @@ if (fontDialog.ShowDialog() == true)
 
 #### 字体选择控件（FontPickerControl） 
 字体选择控件-样式1：    
-![FontPickerControl](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontPickerControl.jpg)  
+![字体选择控件1](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E9%80%89%E6%8B%A9%E6%8E%A7%E4%BB%B6.jpg)  
             
 字体选择控件-样式2：    
-![FontPickerControl2](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontPickerControl2.jpg)  
+![字体选择控件2](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E9%80%89%E6%8B%A9%E6%8E%A7%E4%BB%B62.jpg)  
              
 字体选择控件-样式3：    
-![FontPickerControl3](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontPickerControl3.jpg)     
+![字体选择控件3](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E9%80%89%E6%8B%A9%E6%8E%A7%E4%BB%B63.jpg)     
 
 附加属性 “SelectedFont”（选择的字体）可以获取和设置。    
 附加属性 “WithoutDecorations”（不要装饰线设置）和 “WithoutPreviewRow” （不要预览行）值为True的时候可以折叠对应区域。     
