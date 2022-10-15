@@ -25,7 +25,18 @@ namespace ColorFontPickerWPF
         public Color SelectedColor
         {
             get { return (Color)GetValue(SelectedColorProperty); }
-            set { SetValue(SelectedColorProperty, value); }
+            set
+            {
+                SetValue(SelectedColorProperty, value);
+                if (changing) return;
+                changing = true;
+                try
+                {
+                    ApplyChangeToText(ColorFormat.None);
+                }
+                catch { }
+                changing = false;
+            }
         }
         public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color), typeof(ColorPickerControl), new PropertyMetadata(null));
 
@@ -37,28 +48,28 @@ namespace ColorFontPickerWPF
         public static readonly DependencyProperty WithoutColorCellsProperty = DependencyProperty.Register("WithoutColorCells", typeof(bool), typeof(ColorPickerControl), new PropertyMetadata(null));
 
 
-       /* public SupportedLanguage UILanguage
-        {
-            get { return (SupportedLanguage)GetValue(UILanguageProperty); }
-            set{SetValue(UILanguageProperty, value);}
-        }
-        public static readonly DependencyProperty UILanguageProperty = DependencyProperty.Register("UILanguage", typeof(SupportedLanguage), typeof(ColorPickerControl), new FrameworkPropertyMetadata(0,new PropertyChangedCallback(UILanguagePropertyChanged)));
+        /* public SupportedLanguage UILanguage
+         {
+             get { return (SupportedLanguage)GetValue(UILanguageProperty); }
+             set{SetValue(UILanguageProperty, value);}
+         }
+         public static readonly DependencyProperty UILanguageProperty = DependencyProperty.Register("UILanguage", typeof(SupportedLanguage), typeof(ColorPickerControl), new FrameworkPropertyMetadata(0,new PropertyChangedCallback(UILanguagePropertyChanged)));
 
-        private static void UILanguagePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            switch (e.NewValue)
-            {
-                case SupportedLanguage.Auto:
-                    LanguageManager.SwitchLanguage(System.Threading.Thread.CurrentThread.CurrentUICulture.Name);
-                    break;
-                case SupportedLanguage.Chinese:
-                    LanguageManager.SwitchLanguage("zh-CN");
-                    break;
-                case SupportedLanguage.English:
-                    LanguageManager.SwitchLanguage("en-US");
-                    break;
-            }
-        }*/
+         private static void UILanguagePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+         {
+             switch (e.NewValue)
+             {
+                 case SupportedLanguage.Auto:
+                     LanguageManager.SwitchLanguage(System.Threading.Thread.CurrentThread.CurrentUICulture.Name);
+                     break;
+                 case SupportedLanguage.Chinese:
+                     LanguageManager.SwitchLanguage("zh-CN");
+                     break;
+                 case SupportedLanguage.English:
+                     LanguageManager.SwitchLanguage("en-US");
+                     break;
+             }
+         }*/
 
         bool changing = false;
         bool loaded = false;
@@ -98,20 +109,25 @@ namespace ColorFontPickerWPF
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                var grid = (Grid)sender;
-                Point position = e.GetPosition(grid);
-
-                HSL hsl = new RGB(SelectedColor.R, SelectedColor.G, SelectedColor.B).ToHSL();
-                hsl.H = (int)Math.Round(position.X / grid.ActualWidth * 360);
-                hsl.S = (int)Math.Round((1 - position.Y / grid.ActualHeight) * 100);
-                HSLH.Text = hsl.H.ToString();
-                HSLS.Text = hsl.S.ToString();
-                RGB rgb = hsl.ToRGB();
-                SelectedColor = rgb.ToColor();
-
-                PickerPath.Margin = new Thickness(position.X - 5, position.Y - 5, 0, 0);
+                if (changing) return;
                 changing = true;
-                ApplyChangeToText(ColorFormat.Picker);
+                try
+                {
+                    var grid = (Grid)sender;
+                    Point position = e.GetPosition(grid);
+
+                    HSL hsl = new RGB(SelectedColor.R, SelectedColor.G, SelectedColor.B).ToHSL();
+                    hsl.H = (int)Math.Round(position.X / grid.ActualWidth * 360);
+                    hsl.S = (int)Math.Round((1 - position.Y / grid.ActualHeight) * 100);
+                    HSLH.Text = hsl.H.ToString();
+                    HSLS.Text = hsl.S.ToString();
+                    RGB rgb = hsl.ToRGB();
+                    SelectedColor = rgb.ToColor();
+
+                    PickerPath.Margin = new Thickness(position.X - 5, position.Y - 5, 0, 0);
+                    ApplyChangeToText(ColorFormat.Picker);
+                }
+                catch { }
                 changing = false;
             }
         }
@@ -127,15 +143,29 @@ namespace ColorFontPickerWPF
             screenPickerWindow.ShowDialog();
             if (screenPickerWindow.pickColor != Colors.Transparent)
             {
-                SelectedColor = screenPickerWindow.pickColor;
-                ApplyChangeToText(ColorFormat.None);
+                if (changing) return;
+                changing = true;
+                try
+                {
+                    SelectedColor = screenPickerWindow.pickColor;
+                    ApplyChangeToText(ColorFormat.None);
+                }
+                catch { }
+                changing = false;
             }
         }
         private void ColorButton_Click(object sender, RoutedEventArgs e)
         {
-            Button button = sender as Button;
-            SelectedColor = (button.Background as SolidColorBrush).Color;
-            ApplyChangeToText(ColorFormat.None);
+            if (changing) return;
+            changing = true;
+            try
+            {
+                Button button = sender as Button;
+                SelectedColor = (button.Background as SolidColorBrush).Color;
+                ApplyChangeToText(ColorFormat.None);
+            }
+            catch { }
+            changing = false;
         }
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {

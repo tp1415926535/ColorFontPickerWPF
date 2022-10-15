@@ -25,7 +25,9 @@ namespace ColorFontPickerWPF
         public Font SelectedFont
         {
             get { return (Font)GetValue(SelectedFontProperty); }
-            set { SetValue(SelectedFontProperty, value); }
+            set { SetValue(SelectedFontProperty, value);
+                UpdateFontChanged();
+            }
         }
         public static readonly DependencyProperty SelectedFontProperty = DependencyProperty.Register("SelectedFont", typeof(Font), typeof(FontPickerControl), new PropertyMetadata(null));
         public bool WithoutDecorations
@@ -82,6 +84,10 @@ namespace ColorFontPickerWPF
             loaded = true;
             if (SelectedFont == null)
                 SelectedFont = defaultFont;
+
+        }
+        private void UpdateFontChanged()
+        {
             SizeSelector.SelectedItem = fontSizeDic.FirstOrDefault(x => x.Value.Equals(SelectedFont.FontSize));
             if (SizeSelector.SelectedItem == null)
                 SizeTextbox.Text = SelectedFont.FontSize.ToString();

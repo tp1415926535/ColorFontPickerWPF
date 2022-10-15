@@ -25,7 +25,7 @@ namespace DemoNETCore
         public MainWindow()
         {
             InitializeComponent();
-            //PickerLanguageManager.SwitchLanguage(new CultureInfo("de-AT"));
+            //PickerLanguageManager.SwitchLanguage(new CultureInfo("en-US"));
         }
 
         private void ColorDialogButton_Click(object sender, RoutedEventArgs e)
@@ -38,10 +38,20 @@ namespace DemoNETCore
 
         private void FontDialogButton_Click(object sender, RoutedEventArgs e)
         {
-            FontDialog fontDialog = new FontDialog();
+            FontDialog fontDialog = new FontDialog(); 
             fontDialog.GetFont(PreviewTextBlock);
             if (fontDialog.ShowDialog() == true)
                 fontDialog.SetFont(PreviewTextBlock);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            fontPicker.SelectedFont = new Font
+            {
+                FontFamily = new FontFamily("Microsoft YaHei UI"),
+                FontSize = 48,
+            };
+            colorPicker.SelectedColor = Colors.Blue;
         }
     }
 

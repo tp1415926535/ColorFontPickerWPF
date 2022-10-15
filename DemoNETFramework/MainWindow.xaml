@@ -79,6 +79,7 @@
                 </GroupBox>
             </Grid>
         </GroupBox>
+        <Button Content="SetDefault" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Button_Click"/>
     </Grid>
 </Window>
 

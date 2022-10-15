@@ -42,5 +42,14 @@ namespace DemoNETFramework
             if (fontDialog.ShowDialog() == true)
                 fontDialog.SetFont(PreviewTextBlock);
         }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            fontPicker.SelectedFont = new Font
+            {
+                FontFamily = new FontFamily("Microsoft YaHei UI"),
+                FontSize = 48,
+            };
+            colorPicker.SelectedColor = Colors.Blue;
+        }
     }
 }
