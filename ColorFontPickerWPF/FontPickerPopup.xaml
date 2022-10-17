@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="ColorFontPickerWPF.FontPickerPopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ColorFontPickerWPF"
+             mc:Ignorable="d" Height="24" Width="136">
+    <UserControl.Resources>
+        <local:FontTextConverter x:Key="FontTextConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Border BorderBrush="Silver" BorderThickness="1" MouseUp="Border_MouseUp">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
+                       FontFamily="{Binding SelectedFont.FontFamily,ElementName=fontPicker}"
+                       FontStretch="{Binding Path=SelectedFont.FamilyTypeface.Stretch,ElementName=fontPicker}"
+                       FontWeight="{Binding Path=SelectedFont.FamilyTypeface.Weight,ElementName=fontPicker}"
+                       FontStyle="{Binding Path=SelectedFont.FamilyTypeface.Style,ElementName=fontPicker}">
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{StaticResource FontTextConverter}">
+                            <Binding Path="FontText" RelativeSource="{RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}"/>
+                            <Binding ElementName="fontPicker" Path="SelectedFont.FontSize"/>
+                        </MultiBinding>                    
+                    </TextBlock.Text>
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextDecorations" Value="None"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=fontPicker,Path=SelectedFont.TextDecorationType}" Value="1">
+                                    <Setter Property="TextDecorations" Value="OverLine"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=fontPicker,Path=SelectedFont.TextDecorationType}" Value="2">
+                                    <Setter Property="TextDecorations" Value="Strikethrough"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=fontPicker,Path=SelectedFont.TextDecorationType}" Value="3">
+                                    <Setter Property="TextDecorations" Value="Baseline"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=fontPicker,Path=SelectedFont.TextDecorationType}" Value="4">
+                                    <Setter Property="TextDecorations" Value="Underline"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+                <ToggleButton Grid.Column="1" Background="WhiteSmoke" BorderBrush="Silver" BorderThickness="1,0,0,0" IsChecked="{Binding ElementName=ControlPopup,Path=IsOpen,Mode=TwoWay}">
+                    <Path Stroke="Black" Data="M 0,0 5,5 10,0" Stretch="Uniform"/>
+                </ToggleButton>
+            </Grid>
+        </Border>
+        <Popup x:Name="ControlPopup" StaysOpen="False" AllowsTransparency="True">
+            <Grid>
+                <Border Background="Gray" Margin="5">
+                    <Border.Effect>
+                        <DropShadowEffect Direction="310" ShadowDepth="0" BlurRadius="8" Opacity="0.3"/>
+                    </Border.Effect>
+                </Border>
+                <Border Background="White" BorderBrush="Silver"  Margin="0,0,5,5" BorderThickness="1">
+                    <local:FontPickerControl x:Name="fontPicker" Margin="10" SelectedFont="{Binding SelectedFont,RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor},UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                </Border>
+            </Grid>
+        </Popup>
+    </Grid>
+</UserControl>

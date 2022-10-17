@@ -109,11 +109,14 @@ namespace ColorFontPickerWPF
                     UnderlineRadio.IsChecked = true;
                     break;
             }
+            ScrollToSelection();
+        }
+        public void ScrollToSelection()
+        {
             FontSelector.ScrollIntoView(FontSelector.SelectedItem);
             TypefaceSelector.ScrollIntoView(TypefaceSelector.SelectedItem);
             SizeSelector.ScrollIntoView(SizeSelector.SelectedItem);
         }
-
         private void SizeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var pair = (KeyValuePair<string, double>)SizeSelector.SelectedItem;

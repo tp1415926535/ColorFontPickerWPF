@@ -360,6 +360,9 @@ namespace ColorFontPickerWPF
                     case "Top":
                         rgb = new HSL(hsl.H, hsl.S, 100).ToRGB();
                         break;
+                    case "Center":
+                        rgb = new HSL(hsl.H, hsl.S, 50).ToRGB();
+                        break;
                     case "Bottom":
                         rgb = new HSL(hsl.H, hsl.S, 0).ToRGB();
                         break;

@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="ColorFontPickerWPF.ColorPickerPopup"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ColorFontPickerWPF"
+             mc:Ignorable="d" Height="24" Width="136">
+    <UserControl.Resources>
+        <local:InvertLightColorConverter x:Key="InvertLightColorConverter"/>
+        <local:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
+        <local:ColorToTextConverter x:Key="ColorToTextConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Border BorderBrush="Silver" BorderThickness="1" MouseUp="Border_MouseUp">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Background="{Binding ElementName=colorPicker,Path=SelectedColor,Converter={StaticResource ColorToBrushConverter}}" Margin="2" Foreground="{Binding Path=Background, RelativeSource={RelativeSource Self},Converter={StaticResource InvertLightColorConverter}}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Padding="0">
+                    <Label.Content>
+                        <MultiBinding Converter="{StaticResource ColorToTextConverter}">
+                            <Binding ElementName="colorPicker" Path="SelectedColor" />
+                            <Binding Path="ColorText" RelativeSource="{RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}"/>
+                        </MultiBinding>
+                    </Label.Content>
+                </Label>
+                <ToggleButton Grid.Column="1" Background="WhiteSmoke" BorderBrush="Silver" BorderThickness="1,0,0,0" IsChecked="{Binding ElementName=ControlPopup,Path=IsOpen,Mode=TwoWay}">
+                    <Path Stroke="Black" Data="M 0,0 5,5 10,0" Stretch="Uniform"/>
+                </ToggleButton>
+            </Grid>
+        </Border>
+        <Popup x:Name="ControlPopup" StaysOpen="False" AllowsTransparency="True">
+            <Grid>
+                <Border Background="Gray" Margin="5">
+                    <Border.Effect>
+                        <DropShadowEffect Direction="310" ShadowDepth="0" BlurRadius="8" Opacity="0.3"/>
+                    </Border.Effect>
+                </Border>
+                <Border Background="White" BorderBrush="Silver"  Margin="0,0,5,5" BorderThickness="1">
+                    <local:ColorPickerControl x:Name="colorPicker" Margin="10" SelectedColor="{Binding SelectedColor,RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor},UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                </Border>
+            </Grid>
+        </Popup>
+    </Grid>
+</UserControl>

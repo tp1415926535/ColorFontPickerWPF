@@ -5,12 +5,12 @@
     <UseWPF>true</UseWPF>
     <Authors>纵码过河山</Authors>
     <Company>纵码过河山</Company>
-    <Description>Color picker and font picker add-ons built for WPF. Includes color dialog, color picker control, font dialog, font picker control. Dialogs follow Winform design, controls can be added directly in xaml and support collapsing. The interface automatically displays the corresponding language according to the threads, the localization includes 14 languages.
-为WPF打造的颜色选择器和字体选择器附加功能。包括颜色对话框、颜色选择控件、字体对话框、字体选择控件。对话框沿用Winform的设计，控件可以直接在xaml中插入并支持折叠。界面根据线程自动显示对应语言，本地化包括14种语言。</Description>
+    <Description>Color picker and font picker add-ons built for WPF. Includes color dialog, color picker popup/control, font dialog, font picker popup/control. Dialogs follow Winform design, controls can be added directly in xaml and support collapsing. The interface automatically displays the corresponding language according to the threads, the localization includes 14 languages.
+为WPF打造的颜色选择器和字体选择器附加功能。包括颜色对话框、颜色选择下拉/控件、字体对话框、字体选择下拉/控件。对话框沿用Winform的设计，控件可以直接在xaml中插入并支持折叠。界面根据线程自动显示对应语言，本地化包括14种语言。</Description>
     <PackageProjectUrl>https://github.com/tp1415926535/ColorFontPickerWPF</PackageProjectUrl>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>

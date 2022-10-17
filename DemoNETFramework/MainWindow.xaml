@@ -6,12 +6,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DemoNETFramework"
         mc:Ignorable="d"
-        Title="MainWindow" Height="558" Width="1188" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="669" Width="1188" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <cf:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
     </Window.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -31,7 +32,51 @@
                 <Button x:Name="FontDialogButton" Content="ShowFontDialog"  Width="200" Click="FontDialogButton_Click" Grid.Column="1" Grid.Row="1" Margin="0,5,0,0"/>
             </Grid>
         </GroupBox>
-        <GroupBox  Header="UserControl" Grid.Row="1" Margin="0,10,0,0">
+        <GroupBox Header="Popup" Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                    <TextBlock Text="ColorText:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <ComboBox x:Name="ColorTextCombo" SelectedIndex="0" VerticalContentAlignment="Center">
+                        <ComboBoxItem Content="None"/>
+                        <ComboBoxItem Content="RGB"/>
+                        <ComboBoxItem Content="HEX"/>
+                        <ComboBoxItem Content="HSL"/>
+                    </ComboBox>
+                </StackPanel>
+                <cf:ColorPickerPopup Grid.Row="1" x:Name="colorPickerPopup"  SelectedColor="Yellow">
+                    <cf:ColorPickerPopup.Style>
+                        <Style TargetType="cf:ColorPickerPopup">
+                            <Setter Property="ColorText" Value="None"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=ColorTextCombo,Path=SelectedIndex}" Value="1">
+                                    <Setter Property="ColorText" Value="RGB"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=ColorTextCombo,Path=SelectedIndex}" Value="2">
+                                    <Setter Property="ColorText" Value="HEX"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=ColorTextCombo,Path=SelectedIndex}" Value="3">
+                                    <Setter Property="ColorText" Value="HSL"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </cf:ColorPickerPopup.Style>
+                </cf:ColorPickerPopup>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1" Margin="5">
+                    <TextBlock Text="FontText:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                    <TextBox x:Name="fontPopupText"  Margin="5" MinWidth="100" Text="字体大小：{fontsize}px"/>
+                </StackPanel>
+                <cf:FontPickerPopup Grid.Column="1" Grid.Row="1" FontText="{Binding ElementName=fontPopupText,Path=Text}" />
+            </Grid>
+        </GroupBox>
+        <GroupBox  Header="UserControl" Grid.Row="2" Margin="0,10,0,0">
             <Grid>
                 <Grid.Resources>
                     <Style TargetType="GroupBox">
@@ -79,7 +124,7 @@
                 </GroupBox>
             </Grid>
         </GroupBox>
-        <Button Content="SetDefault" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="SetDefault" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Button_Click"/>
     </Grid>
 </Window>
 
