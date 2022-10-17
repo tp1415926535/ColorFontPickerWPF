@@ -1,11 +1,11 @@
 # ColorFontPickerWPF
 Color picker and font picker add-ons built for WPF.     
-Includes **ColorDialog**, **ColorPickerControl**, **FontDialog**, **FontPickerControl**.    
-Dialogs follow Winform design, controls can be added directly in xaml and support collapsing.     
+Includes **ColorDialog**, **ColorPickerControl**, **ColorPickerPopup**, **FontDialog**, **FontPickerControl** , **FontPickerPopup** .      
+Dialogs follow Winform design, controls can be added directly in xaml and support collapsing.      
 The interface automatically displays the corresponding language according to the threads, the localization includes 14 languages.     
 
 为WPF打造的颜色选择器和字体选择器附加功能。    
-包括颜色对话框、颜色选择控件、字体对话框、字体选择控件。    
+包括颜色对话框、颜色选择控件、颜色选择下拉、字体对话框、字体选择控件、字体选择下拉。    
 对话框沿用Winform的设计，控件可以直接在xaml中插入并支持折叠。    
 界面根据线程自动显示对应语言，本地化包括14种语言。   
     
