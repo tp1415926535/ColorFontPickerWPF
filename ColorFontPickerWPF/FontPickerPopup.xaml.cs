@@ -51,6 +51,22 @@ namespace ColorFontPickerWPF
             ControlPopup.IsOpen = !ControlPopup.IsOpen;
             fontPicker.ScrollToSelection();
         }
+        public void GetFont(Control control)
+        {
+            SelectedFont = FontHelper.GetFont(control);
+        }
+        public void GetFont(TextBlock textBlock)
+        {
+            SelectedFont = FontHelper.GetFont(textBlock);
+        }
+        public void SetFont(Control control)
+        {
+            FontHelper.SetFont(control, SelectedFont);
+        }
+        public void SetFont(TextBlock textblock)
+        {
+            FontHelper.SetFont(textblock, SelectedFont);
+        }
     }
     public class SizeFormatConverter : IValueConverter
     {
