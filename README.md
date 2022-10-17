@@ -13,7 +13,7 @@ ColorDialog:
 ![ColorDialog](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorDialog.jpg)       
      
 ColorPickerPopup:      
-![ColorPickerPopup](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorPickerPopup1.jpg)      
+![ColorPickerPopup](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorPickerPopup2.jpg)      
      
 FontDialog:     
 ![FontDialog](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontDialog.jpg)      
@@ -220,10 +220,16 @@ PickerLanguageManager.SwitchLanguage(new CultureInfo("zh-CN"));
 # 中文说明   
 颜色对话框：     
 ![颜色对话框](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E9%A2%9C%E8%89%B2%E5%AF%B9%E8%AF%9D%E6%A1%86.jpg)       
-         
+      
+颜色选择下拉：      
+![颜色选择下拉](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E9%A2%9C%E8%89%B2%E9%80%89%E6%8B%A9%E4%B8%8B%E6%8B%892.jpg)       
+      
 字体对话框：     
 ![字体对话框](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E5%AF%B9%E8%AF%9D%E6%A1%86.jpg)      
-
+     
+字体选择下拉：     
+![字体选择下拉](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E9%80%89%E6%8B%A9%E4%B8%8B%E6%8B%893.jpg)      
+      
 ## 使用   
 从Nuget下载包，或者引用Release中的dll。   
 
@@ -361,7 +367,7 @@ FontText="":
 FontText="Font Example":    
 ![字体选择下拉-文本2](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E9%80%89%E6%8B%A9%E4%B8%8B%E6%8B%892.jpg)     
 
-FontText="Size:{fontsize}":       
+FontText="字号：{fontsize}px":       
 ![字体选择下拉-文本3](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E9%80%89%E6%8B%A9%E4%B8%8B%E6%8B%893.jpg)     
 
 * 用 xaml 的方式         
