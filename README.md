@@ -364,7 +364,7 @@ grid.Children.Add(fontPicker);
 FontText="":    
 ![字体选择下拉-文本1](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E9%80%89%E6%8B%A9%E4%B8%8B%E6%8B%891.jpg)     
 
-FontText="Font Example":    
+FontText="字体预览":    
 ![字体选择下拉-文本2](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E9%80%89%E6%8B%A9%E4%B8%8B%E6%8B%892.jpg)     
 
 FontText="字号：{fontsize}px":       
