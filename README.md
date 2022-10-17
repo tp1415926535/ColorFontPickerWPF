@@ -1,6 +1,6 @@
 # ColorFontPickerWPF
 Color picker and font picker add-ons built for WPF.     
-Includes **ColorDialog**, **ColorPickerControl**, **ColorPickerPopup**, **FontDialog**, **FontPickerControl** , **FontPickerPopup** .      
+Includes **ColorDialog**, **ColorPickerControl**, **ColorPickerPopup**, **FontDialog**, **FontPickerControl**, **FontPickerPopup** .      
 Dialogs follow Winform design, controls can be added directly in xaml and support collapsing.      
 The interface automatically displays the corresponding language according to the threads, the localization includes 14 languages.     
 
@@ -266,7 +266,7 @@ var colorPicker = new ColorPickerControl();
 grid.Children.Add(colorPicker);
 ```
 
-#### 颜色选择下拉  
+#### 颜色选择下拉（ColorPickerPopup）  
     
 ![颜色选择下拉](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E9%A2%9C%E8%89%B2%E9%80%89%E6%8B%A9%E4%B8%8B%E6%8B%89.jpg)  
      
@@ -349,7 +349,7 @@ grid.Children.Add(fontPicker);
 ```
 
      
-#### 字体选择下拉  
+#### 字体选择下拉（FontPickerPopup）  
 ![字体选择下拉](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E9%80%89%E6%8B%A9%E4%B8%8B%E6%8B%89.jpg)  
      
 附加属性 “SelectedFont”（选择的字体）可以获取和设置。     
