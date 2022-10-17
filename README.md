@@ -15,8 +15,8 @@ ColorDialog:
 FontDialog:     
 ![FontDialog](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontDialog.jpg)      
       
-[![release](https://img.shields.io/static/v1?label=release&message=1.0.1&color=green&logo=github)](https://github.com/tp1415926535/ColorFontPickerWPF/releases) 
-[![nuget](https://img.shields.io/static/v1?label=nuget&message=1.0.1&color=lightblue&logo=nuget)](https://www.nuget.org/packages/ColorFontPickerWPF) 
+[![release](https://img.shields.io/static/v1?label=release&message=1.0.2&color=green&logo=github)](https://github.com/tp1415926535/ColorFontPickerWPF/releases) 
+[![nuget](https://img.shields.io/static/v1?label=nuget&message=1.0.2&color=lightblue&logo=nuget)](https://www.nuget.org/packages/ColorFontPickerWPF) 
 [![license](https://img.shields.io/static/v1?label=license&message=MIT&color=silver)](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/LICENSE) 
 ![C#](https://img.shields.io/github/languages/top/tp1415926535/ColorFontPickerWPF)        
 
@@ -148,6 +148,7 @@ PickerLanguageManager.SwitchLanguage(new CultureInfo("zh-CN"));
 14 languages are currently supported, including: Chinese, English, Arabic, Czech, German, Spanish, French, Hungarian, Italian, Japanese, Portuguese, Romanian, Russian, and Swedish.    
 
 ## Version   
+* v1.0.2 2022/10/15 Fix the bug that some parts are not updated after the assignment.    
 * v1.0.1 2022/10/14 Removed the use of color library, color conversion was changed to self-implemented. Fixed bugs in font dialog. added multi-language support, expanded from 2 to 14 languages.    
 * v1.0.0 2022/10/13 Basic features. Dialogs and selection controls.   
 ---
@@ -284,5 +285,6 @@ PickerLanguageManager.SwitchLanguage(new CultureInfo("zh-CN"));
 目前支持14种语言，包括：中文，英语，阿拉伯语，捷克语，德语，西班牙语，法语，匈牙利语，意大利语，日语，葡萄牙语，罗马尼亚语，俄语，瑞典语。    
 
 ## 版本   
+* v1.0.2 2022/10/15 修复赋值之后部分不更新的bug。 
 * v1.0.1 2022/10/14 移除了对颜色库的使用，颜色转换改为自行实现。字体对话框修复bug。新增多语言支持，从2种语言扩展到14种。    
 * v1.0.0 2022/10/13 基本功能。对话框和选择控件。    
