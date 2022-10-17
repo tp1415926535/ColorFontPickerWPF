@@ -12,13 +12,13 @@ The interface automatically displays the corresponding language according to the
 ColorDialog:    
 ![ColorDialog](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorDialog.jpg)       
      
-ColorPickerPopup:
+ColorPickerPopup:      
 ![ColorPickerPopup](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/ColorPickerPopup1.jpg)      
      
 FontDialog:     
 ![FontDialog](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontDialog.jpg)      
      
-FontPickerPopup:
+FontPickerPopup:     
 ![FontPickerPopup](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontPickerPopup1.jpg)      
       
 [![release](https://img.shields.io/static/v1?label=release&message=1.0.3&color=green&logo=github)](https://github.com/tp1415926535/ColorFontPickerWPF/releases) 
@@ -28,7 +28,8 @@ FontPickerPopup:
 
 [![Description](https://img.shields.io/static/v1?label=English&message=Description&color=yellow)](https://github.com/tp1415926535/ColorFontPickerWPF#english-description) 
 [![说明](https://img.shields.io/static/v1?label=中文&message=说明&color=red)](https://github.com/tp1415926535/ColorFontPickerWPF#中文说明)      
-      
+       
+       
 # English Description
 ## Usage   
 Download package from Nuget, or using the release Dll.   
