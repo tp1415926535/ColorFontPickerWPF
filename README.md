@@ -271,7 +271,7 @@ grid.Children.Add(colorPicker);
 ![颜色选择下拉](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E9%A2%9C%E8%89%B2%E9%80%89%E6%8B%A9%E4%B8%8B%E6%8B%89.jpg)  
      
 附加属性“SelectedColor”（选择的颜色）可以设置和获取。   
-附加属性“ColorText”（颜色文本）可以显示当前颜色值, 支持颜色模型：'None','RGB','HEX','HSL'。      
+附加属性“ColorText”（颜色文本）可以显示当前颜色值，支持颜色模型："None"，"RGB"，"HEX"，"HSL"。      
 
 ColorText = "RGB":    
 ![颜色选择下拉-文本1](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E9%A2%9C%E8%89%B2%E9%80%89%E6%8B%A9%E4%B8%8B%E6%8B%891.jpg)     
@@ -353,7 +353,7 @@ grid.Children.Add(fontPicker);
 ![字体选择下拉](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E9%80%89%E6%8B%A9%E4%B8%8B%E6%8B%89.jpg)  
      
 附加属性 “SelectedFont”（选择的字体）可以获取和设置。     
-附加属性 “FontText”（字体文本） 可以显示当前字体样式，默认显示 'FontSize: {fontsize}px'.可以自定义任何内容，并且“{fontsize}”可以作为变量显示当前字号。    
+附加属性 “FontText”（字体文本） 可以显示当前字体样式，默认显示 'FontSize: {fontsize}px'。可以自定义任何内容，并且“{fontsize}”可以作为变量显示当前字号。    
 
 FontText="":    
 ![字体选择下拉-文本1](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/%E5%AD%97%E4%BD%93%E9%80%89%E6%8B%A9%E4%B8%8B%E6%8B%891.jpg)     
