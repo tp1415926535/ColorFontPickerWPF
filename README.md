@@ -21,8 +21,8 @@ FontDialog:
 FontPickerPopup:     
 ![FontPickerPopup](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/ScreenShots/FontPickerPopup1.jpg)      
       
-[![release](https://img.shields.io/static/v1?label=release&message=1.0.3&color=green&logo=github)](https://github.com/tp1415926535/ColorFontPickerWPF/releases) 
-[![nuget](https://img.shields.io/static/v1?label=nuget&message=1.0.3&color=lightblue&logo=nuget)](https://www.nuget.org/packages/ColorFontPickerWPF) 
+[![release](https://img.shields.io/github/v/release/tp1415926535/ColorFontPickerWPF?color=green&logo=github)](https://github.com/tp1415926535/ColorFontPickerWPF/releases) 
+[![nuget](https://img.shields.io/nuget/v/MessageWindowWPF?color=lightblue&logo=nuget)](https://www.nuget.org/packages/ColorFontPickerWPF) 
 [![license](https://img.shields.io/static/v1?label=license&message=MIT&color=silver)](https://github.com/tp1415926535/ColorFontPickerWPF/blob/master/LICENSE) 
 ![C#](https://img.shields.io/github/languages/top/tp1415926535/ColorFontPickerWPF)        
 
