@@ -9,7 +9,6 @@ namespace ColorFontPickerWPF
 {
     public class PickerLanguageManager
     {
-
         static Dictionary<string, ResourceDictionary> languages = new Dictionary<string, ResourceDictionary>() {
             {"zh",  new ResourceDictionary { Source = new Uri($"/ColorFontPickerWPF;component/Language/Chinese.xaml", UriKind.Relative) } },
             {"en",  new ResourceDictionary { Source = new Uri($"/ColorFontPickerWPF;component/Language/English.xaml", UriKind.Relative) } },
@@ -26,8 +25,9 @@ namespace ColorFontPickerWPF
             {"es",  new ResourceDictionary { Source = new Uri($"/ColorFontPickerWPF;component/Language/Spanish.xaml", UriKind.Relative) } },
             {"sv",  new ResourceDictionary { Source = new Uri($"/ColorFontPickerWPF;component/Language/Swedish.xaml", UriKind.Relative) } },
         };
+        public static Settings settings = new Settings() { UIculture = System.Threading.Thread.CurrentThread.CurrentUICulture };
 
-        public static void SwitchLanguage(CultureInfo cultureInfo)
+        private static void SwitchLanguage(CultureInfo cultureInfo)
         {
             if (cultureInfo.Name.Length >= 2)
             {
@@ -53,6 +53,18 @@ namespace ColorFontPickerWPF
             if (!dic.Contains(languages[lan]))
                 dic.Add(languages[lan]);
         }
-
+        public class Settings
+        {
+            private CultureInfo culture;
+            public CultureInfo UIculture
+            {
+                get { return culture; }
+                set
+                {
+                    culture = value;
+                    SwitchLanguage(value);
+                }
+            }
+        }
     }
 }

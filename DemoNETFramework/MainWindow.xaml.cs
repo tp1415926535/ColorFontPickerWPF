@@ -24,7 +24,7 @@ namespace DemoNETFramework
         public MainWindow()
         {
             InitializeComponent();
-            //PickerLanguageManager.SwitchLanguage(new System.Globalization.CultureInfo("en-US"));
+            //PickerLanguageManager.settings.UIculture = new CultureInfo("en-US");
         }
 
         private void ColorDialogButton_Click(object sender, RoutedEventArgs e)

@@ -84,7 +84,7 @@ namespace ColorFontPickerWPF
             for (int i = 0; i < 8; i++)
                 saveColors.Add(Colors.White);
 
-            PickerLanguageManager.SwitchLanguage(System.Threading.Thread.CurrentThread.CurrentUICulture);
+            var currentCulture = PickerLanguageManager.settings.UIculture;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

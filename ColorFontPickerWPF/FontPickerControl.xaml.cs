@@ -62,7 +62,7 @@ namespace ColorFontPickerWPF
             FontSelector.ItemsSource = list;
             SizeSelector.ItemsSource = fontSizeDic;
 
-            PickerLanguageManager.SwitchLanguage(System.Threading.Thread.CurrentThread.CurrentUICulture);
+            var currentCulture = PickerLanguageManager.settings.UIculture;
             try
             {
                 string lan = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLower().Substring(0, 2);
