@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
              xmlns:local="clr-namespace:ColorFontPickerWPF"
-             mc:Ignorable="d" Height="300" Width="500" Loaded="UserControl_Loaded" >
+             mc:Ignorable="d" Height="260" Width="500" Loaded="UserControl_Loaded" >
     <UserControl.Resources>
         <local:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
         <local:HSLRangeConverter x:Key="HSLRangeConverter"/>
@@ -314,8 +314,8 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Grid>
-                <GroupBox Header="{DynamicResource BasicColor}" Margin="0,0,0,5" UseLayoutRounding="True">
+            <Grid Margin="0,0,0,5">
+                <GroupBox Header="{DynamicResource BasicColor}" UseLayoutRounding="True">
                     <UniformGrid Rows="6" Columns="8" Grid.Row="1" Margin="3">
                         <UniformGrid.Resources>
                             <Style TargetType="Button" BasedOn="{StaticResource ColorButton}">

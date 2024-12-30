@@ -84,7 +84,7 @@ namespace ColorFontPickerWPF
             for (int i = 0; i < 8; i++)
                 saveColors.Add(Colors.White);
 
-            var currentCulture = PickerLanguageManager.settings.UIculture;
+            var currentCulture = PickerLanguageManager.Settings.UIculture;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

@@ -9,7 +9,7 @@ namespace ColorFontPickerWPF
 {
     public class PickerLanguageManager
     {
-        static Dictionary<string, ResourceDictionary> languages = new Dictionary<string, ResourceDictionary>() {
+        static Dictionary<string, ResourceDictionary> languages { get; set; } = new Dictionary<string, ResourceDictionary>() {
             {"zh",  new ResourceDictionary { Source = new Uri($"/ColorFontPickerWPF;component/Language/Chinese.xaml", UriKind.Relative) } },
             {"en",  new ResourceDictionary { Source = new Uri($"/ColorFontPickerWPF;component/Language/English.xaml", UriKind.Relative) } },
             {"ar",  new ResourceDictionary { Source = new Uri($"/ColorFontPickerWPF;component/Language/Arabic.xaml", UriKind.Relative) } },
@@ -25,11 +25,20 @@ namespace ColorFontPickerWPF
             {"es",  new ResourceDictionary { Source = new Uri($"/ColorFontPickerWPF;component/Language/Spanish.xaml", UriKind.Relative) } },
             {"sv",  new ResourceDictionary { Source = new Uri($"/ColorFontPickerWPF;component/Language/Swedish.xaml", UriKind.Relative) } },
         };
-        public static Settings settings = new Settings() { UIculture = System.Threading.Thread.CurrentThread.CurrentUICulture };
+        /// <summary>
+        /// settings
+        /// </summary>
+        public static PickerSettings Settings { get; set; } = new PickerSettings() { UIculture = System.Threading.Thread.CurrentThread.CurrentUICulture };
 
+        /// <summary>
+        /// switch to target language
+        /// </summary>
+        /// <param name="cultureInfo"></param>
         private static void SwitchLanguage(CultureInfo cultureInfo)
         {
-            if (cultureInfo.Name.Length >= 2)
+            if (cultureInfo.Name.Length < 2)
+                SwitchToExist("en");
+            else
             {
                 var lan = cultureInfo.Name.Substring(0, 2).ToLower();
                 if (!languages.ContainsKey(lan))
@@ -37,10 +46,13 @@ namespace ColorFontPickerWPF
                 else
                     SwitchToExist(lan);
             }
-            else
-                SwitchToExist("en");
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
         }
+
+        /// <summary>
+        /// add or remove resource
+        /// </summary>
+        /// <param name="lan"></param>
         private static void SwitchToExist(string lan)
         {
             var dic = Application.Current.Resources.MergedDictionaries;
@@ -53,7 +65,11 @@ namespace ColorFontPickerWPF
             if (!dic.Contains(languages[lan]))
                 dic.Add(languages[lan]);
         }
-        public class Settings
+
+        /// <summary>
+        /// set language by property
+        /// </summary>
+        public class PickerSettings
         {
             private CultureInfo culture;
             public CultureInfo UIculture

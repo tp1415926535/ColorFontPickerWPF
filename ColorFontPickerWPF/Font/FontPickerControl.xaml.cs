@@ -62,7 +62,7 @@ namespace ColorFontPickerWPF
             FontSelector.ItemsSource = list;
             SizeSelector.ItemsSource = fontSizeDic;
 
-            var currentCulture = PickerLanguageManager.settings.UIculture;
+            var currentCulture = PickerLanguageManager.Settings.UIculture;
             try
             {
                 string lan = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLower().Substring(0, 2);
@@ -142,7 +142,7 @@ namespace ColorFontPickerWPF
                     FontSelector.ScrollIntoView(FontSelector.SelectedItem);
                     break;
                 }
-                if (!matchedStart && item.ToString().ToLower().StartsWith(FontTextbox.Text.ToLower()))
+                if (!matchedStart && item.ToString().ToLower().Contains(FontTextbox.Text.ToLower()))
                 {
                     FontSelector.ScrollIntoView(item);
                     matchedStart = true;
