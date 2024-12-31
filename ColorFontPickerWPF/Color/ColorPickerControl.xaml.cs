@@ -22,76 +22,57 @@ namespace ColorFontPickerWPF
     /// </summary>
     public partial class ColorPickerControl : UserControl
     {
-        public Color SelectedColor
-        {
-            get { return (Color)GetValue(SelectedColorProperty); }
-            set
-            {
-                SetValue(SelectedColorProperty, value);
-                if (changing) return;
-                changing = true;
-                try
-                {
-                    ApplyChangeToText(ColorFormat.None);
-                }
-                catch { }
-                changing = false;
-            }
-        }
-        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color), typeof(ColorPickerControl), new PropertyMetadata(null));
+        /// <summary>
+        /// Prevents properties from being re-altered when changing from internal code
+        /// 从内部方法更改时防止被属性被重改
+        /// </summary>
+        bool changing { get; set; } = false;
 
-        public bool WithoutColorCells
-        {
-            get { return (bool)GetValue(WithoutColorCellsProperty); }
-            set { SetValue(WithoutColorCellsProperty, value); }
-        }
-        public static readonly DependencyProperty WithoutColorCellsProperty = DependencyProperty.Register("WithoutColorCells", typeof(bool), typeof(ColorPickerControl), new PropertyMetadata(null));
+        /// <summary>
+        /// Initialisation check
+        /// 初始化校验
+        /// </summary>
+        bool loaded { get; set; } = false;
 
+        /// <summary>
+        /// Saved colors list
+        /// 保存的颜色列表
+        /// </summary>
+        ObservableCollection<Color> saveColors { get; set; } = new ObservableCollection<Color>();
 
-        /* public SupportedLanguage UILanguage
-         {
-             get { return (SupportedLanguage)GetValue(UILanguageProperty); }
-             set{SetValue(UILanguageProperty, value);}
-         }
-         public static readonly DependencyProperty UILanguageProperty = DependencyProperty.Register("UILanguage", typeof(SupportedLanguage), typeof(ColorPickerControl), new FrameworkPropertyMetadata(0,new PropertyChangedCallback(UILanguagePropertyChanged)));
-
-         private static void UILanguagePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-         {
-             switch (e.NewValue)
-             {
-                 case SupportedLanguage.Auto:
-                     LanguageManager.SwitchLanguage(System.Threading.Thread.CurrentThread.CurrentUICulture.Name);
-                     break;
-                 case SupportedLanguage.Chinese:
-                     LanguageManager.SwitchLanguage("zh-CN");
-                     break;
-                 case SupportedLanguage.English:
-                     LanguageManager.SwitchLanguage("en-US");
-                     break;
-             }
-         }*/
-
-        bool changing = false;
-        bool loaded = false;
-        ObservableCollection<Color> saveColors = new ObservableCollection<Color>();
-        int savedIndex = 0;
+        /// <summary>
+        /// Determine how many colours have been added
+        /// 确定有多少种颜色被添加
+        /// </summary>
+        int savedIndex { get; set; } = 0;
 
         public ColorPickerControl()
         {
             InitializeComponent();
             SaveItems.DataContext = saveColors;
-
             for (int i = 0; i < 8; i++)
                 saveColors.Add(Colors.White);
-
-            var currentCulture = PickerLanguageManager.Settings.UIculture;
+            //var currentCulture = PickerLanguageManager.Settings.UIculture;
         }
 
+        /// <summary>
+        /// Control Load Completion Event
+        /// 控件加载完成事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             loaded = true;
             ApplyChangeToText(ColorFormat.None);
         }
+
+        /// <summary>
+        /// Update slider value when mouse is held down for movement
+        /// 按住鼠标移动时更新滑动条的值
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Slider_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -105,6 +86,12 @@ namespace ColorFontPickerWPF
                 slider.Value = slider.TickFrequency == 1 ? Math.Round(value) : Math.Round(value, 2);
             }
         }
+        /// <summary>
+        /// Drag and drop field pickup points to change colour
+        /// 拖拽域拾取点更改颜色
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PickerGrid_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -124,19 +111,18 @@ namespace ColorFontPickerWPF
                     RGB rgb = hsl.ToRGB();
                     SelectedColor = rgb.ToColor();
 
-                    PickerPath.Margin = new Thickness(position.X - 5, position.Y - 5, 0, 0);
-                    ApplyChangeToText(ColorFormat.Picker);
+                    ApplyChangeToText(ColorFormat.HSL);
                 }
                 catch { }
                 changing = false;
             }
         }
-        private void ColorGrid_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            double left = double.Parse(HSLH.Text) / 360.0 * PickerGrid.ActualWidth;
-            double top = (1 - double.Parse(HSLS.Text) / 100.0) * PickerGrid.ActualHeight;
-            PickerPath.Margin = new Thickness(left - 5, top - 5, 0, 0);
-        }
+        /// <summary>
+        /// Screen Global Pickup Colour
+        /// 屏幕全局拾取颜色
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PickScreenButton_Click(object sender, RoutedEventArgs e)
         {
             ScreenPickerWindow screenPickerWindow = new ScreenPickerWindow();
@@ -154,6 +140,12 @@ namespace ColorFontPickerWPF
                 changing = false;
             }
         }
+        /// <summary>
+        /// Apply a colour from a preset or saved colour to the current
+        /// 从预设颜色或保存的颜色应用到当前
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ColorButton_Click(object sender, RoutedEventArgs e)
         {
             if (changing) return;
@@ -167,16 +159,34 @@ namespace ColorFontPickerWPF
             catch { }
             changing = false;
         }
+        /// <summary>
+        /// Restrict text to numbers only
+        /// 限制文本只能输入数字
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+        /// <summary>
+        /// Restrict text to alphanumeric and #
+        /// 限制文本只能输入字母数字和#
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HEXTextbox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex(@"^[a-zA-Z0-9\#]+$");
             e.Handled = !regex.IsMatch(e.Text);
         }
+        /// <summary>
+        /// Save the current colour to the list
+        /// 保存当前颜色到列表
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SaveColorButton_Click(object sender, RoutedEventArgs e)
         {
             if (savedIndex >= 0 && savedIndex < 8)
@@ -192,6 +202,12 @@ namespace ColorFontPickerWPF
             }
             savedIndex++;
         }
+        /// <summary>
+        /// RGB text change
+        /// RGB文本变化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RGB_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (changing) return;
@@ -219,6 +235,12 @@ namespace ColorFontPickerWPF
             catch { }
             changing = false;
         }
+        /// <summary>
+        /// HSL text change
+        /// HSL文本变化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HSL_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (changing) return;
@@ -247,6 +269,12 @@ namespace ColorFontPickerWPF
             catch { }
             changing = false;
         }
+        /// <summary>
+        /// HEX text change
+        /// HEX文本变化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HEX_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (changing) return;
@@ -262,6 +290,12 @@ namespace ColorFontPickerWPF
             catch { }
             changing = false;
         }
+
+        /// <summary>
+        /// Update other values according to the source of the colour change
+        /// 根据颜色变更来源更新其他值
+        /// </summary>
+        /// <param name="fromColorFormat"></param>
         private void ApplyChangeToText(ColorFormat fromColorFormat)
         {
             if (!loaded)
@@ -288,7 +322,7 @@ namespace ColorFontPickerWPF
                 RGBG.Text = rgb.G.ToString();
                 RGBB.Text = rgb.B.ToString();
             }
-            if (fromColorFormat != ColorFormat.HSL && fromColorFormat != ColorFormat.Picker)
+            if (fromColorFormat != ColorFormat.HSL)
             {
                 HSL hsl = rgb.ToHSL();
                 HSLH.Text = hsl.H.ToString();
@@ -300,81 +334,7 @@ namespace ColorFontPickerWPF
                 HEX hex = rgb.ToHEX();
                 HEXTextbox.Text = hex.Code;
             }
-            if (fromColorFormat != ColorFormat.Picker)
-            {
-                double left = double.Parse(HSLH.Text) / 360.0 * PickerGrid.ActualWidth;
-                double top = (1 - double.Parse(HSLS.Text) / 100.0) * PickerGrid.ActualHeight;
-                PickerPath.Margin = new Thickness(left - 5, top - 5, 0, 0);
-                LightSlider.Value = int.Parse(HSLL.Text);
-            }
             changing = false;
-        }
-
-        enum ColorFormat
-        {
-            None,
-            RGB,
-            HSL,
-            HEX,
-            Picker,
-        }
-
-    }
-    public class ColorToBrushConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value == null)
-                return new SolidColorBrush(Colors.Transparent);
-            else
-            {
-                Color color = (Color)value;
-                return new SolidColorBrush(color);
-            }
-        }
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value == null)
-                return Colors.Transparent;
-            else
-            {
-                SolidColorBrush solidColorBrush = (SolidColorBrush)value;
-                return solidColorBrush.Color;
-            }
-        }
-    }
-    public class HSLRangeConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value == null)
-                return Colors.Transparent;
-            else
-            {
-                Color color = (Color)value;
-                HSL hsl = new RGB(color.R, color.G, color.B).ToHSL();
-                string param = (string)parameter;
-                RGB rgb;
-                switch (param)
-                {
-                    case "Top":
-                        rgb = new HSL(hsl.H, hsl.S, 100).ToRGB();
-                        break;
-                    case "Center":
-                        rgb = new HSL(hsl.H, hsl.S, 50).ToRGB();
-                        break;
-                    case "Bottom":
-                        rgb = new HSL(hsl.H, hsl.S, 0).ToRGB();
-                        break;
-                    default:
-                        return Colors.Transparent;
-                }
-                return rgb.ToColor();
-            }
-        }
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return value;
         }
     }
 

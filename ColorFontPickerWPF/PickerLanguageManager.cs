@@ -9,6 +9,10 @@ namespace ColorFontPickerWPF
 {
     public class PickerLanguageManager
     {
+        /// <summary>
+        /// Defining Language Resources
+        /// 定义语言资源
+        /// </summary>
         static Dictionary<string, ResourceDictionary> languages { get; set; } = new Dictionary<string, ResourceDictionary>() {
             {"zh",  new ResourceDictionary { Source = new Uri($"/ColorFontPickerWPF;component/Language/Chinese.xaml", UriKind.Relative) } },
             {"en",  new ResourceDictionary { Source = new Uri($"/ColorFontPickerWPF;component/Language/English.xaml", UriKind.Relative) } },
@@ -25,35 +29,39 @@ namespace ColorFontPickerWPF
             {"es",  new ResourceDictionary { Source = new Uri($"/ColorFontPickerWPF;component/Language/Spanish.xaml", UriKind.Relative) } },
             {"sv",  new ResourceDictionary { Source = new Uri($"/ColorFontPickerWPF;component/Language/Swedish.xaml", UriKind.Relative) } },
         };
+
         /// <summary>
-        /// settings
+        /// Externally available settings
+        /// 对外提供的设置
         /// </summary>
         public static PickerSettings Settings { get; set; } = new PickerSettings() { UIculture = System.Threading.Thread.CurrentThread.CurrentUICulture };
 
         /// <summary>
-        /// switch to target language
+        /// Switch to target language
+        /// 切换到目标语言
         /// </summary>
         /// <param name="cultureInfo"></param>
         private static void SwitchLanguage(CultureInfo cultureInfo)
         {
             if (cultureInfo.Name.Length < 2)
-                SwitchToExist("en");
+                SetLanguageResource("en");
             else
             {
                 var lan = cultureInfo.Name.Substring(0, 2).ToLower();
                 if (!languages.ContainsKey(lan))
-                    SwitchToExist("en");
+                    SetLanguageResource("en");
                 else
-                    SwitchToExist(lan);
+                    SetLanguageResource(lan);
             }
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
         }
 
         /// <summary>
-        /// add or remove resource
+        /// Add or remove resource
+        /// 添加或移除资源
         /// </summary>
         /// <param name="lan"></param>
-        private static void SwitchToExist(string lan)
+        private static void SetLanguageResource(string lan)
         {
             var dic = Application.Current.Resources.MergedDictionaries;
             foreach (var item in languages)
@@ -67,7 +75,8 @@ namespace ColorFontPickerWPF
         }
 
         /// <summary>
-        /// set language by property
+        /// Entities used for setting
+        /// 设置的实体
         /// </summary>
         public class PickerSettings
         {

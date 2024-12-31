@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
              xmlns:local="clr-namespace:ColorFontPickerWPF"
-             mc:Ignorable="d" Height="260" Width="500" Loaded="UserControl_Loaded" >
+             mc:Ignorable="d" Height="252" Width="500" Loaded="UserControl_Loaded" >
     <UserControl.Resources>
         <local:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
         <local:HSLRangeConverter x:Key="HSLRangeConverter"/>
+        <local:HslPickerPosConverter x:Key="HslPickerPosConverter"/>
 
         <SolidColorBrush x:Key="SliderThumb.Static.Foreground" Color="#FFE5E5E5"/>
         <SolidColorBrush x:Key="SliderThumb.MouseOver.Background" Color="#FFDCECFC"/>
@@ -322,7 +323,7 @@
                                 <EventSetter Event="Click" Handler="ColorButton_Click"/>
                             </Style>
                         </UniformGrid.Resources>
-                        <Button Background="#FF8080" Cursor="Hand"/>
+                        <Button Background="#FF8080"/>
                         <Button Background="#FFFF80"/>
                         <Button Background="#80ff80"/>
                         <Button Background="#00ff80"/>
@@ -418,7 +419,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <Grid SizeChanged="ColorGrid_SizeChanged">
+                    <Grid>
                         <Grid x:Name="PickerGrid" Margin="5" MouseMove="PickerGrid_MouseMove" MouseDown="PickerGrid_MouseMove">
                             <Grid>
                                 <Grid.Background>
@@ -443,7 +444,22 @@
                                 </Grid.Background>
                             </Grid>
                         </Grid>
-                        <Path x:Name="PickerPath" Data="M 10,0 10,6 M 0,10 6,10 M 20,10 14,10 M 10,20 10,14" Stroke="Black" StrokeThickness="2"/>
+                        <Canvas >
+                            <Path x:Name="PickerPath" Data="M 10,0 10,6 M 0,10 6,10 M 20,10 14,10 M 10,20 10,14" Stroke="Black" StrokeThickness="2" Margin="-5,-5,0,0">
+                                <Canvas.Left>
+                                    <MultiBinding Converter="{StaticResource HslPickerPosConverter}" ConverterParameter="left">
+                                        <Binding ElementName="PickerGrid" Path="ActualWidth"/>
+                                        <Binding ElementName="HSLH" Path="Text"/>
+                                    </MultiBinding>
+                                </Canvas.Left>
+                                <Canvas.Top>
+                                    <MultiBinding Converter="{StaticResource HslPickerPosConverter}" ConverterParameter="top">
+                                        <Binding ElementName="PickerGrid" Path="ActualHeight"/>
+                                        <Binding ElementName="HSLS" Path="Text"/>
+                                    </MultiBinding>
+                                </Canvas.Top>
+                            </Path>
+                        </Canvas>
                     </Grid>
                     <Grid Grid.Column="1" Margin="5,0,0,0">
                         <Slider x:Name="LightSlider" Orientation="Vertical" Style="{DynamicResource SliderStyle1}" Maximum="100" IsMoveToPointEnabled="True" IsSnapToTickEnabled="True" MouseMove="Slider_MouseMove" Value="{Binding Text, ElementName=HSLL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
