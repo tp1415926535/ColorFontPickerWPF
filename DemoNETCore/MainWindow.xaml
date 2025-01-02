@@ -51,7 +51,8 @@
                         <ComboBoxItem Content="HSL"/>
                     </ComboBox>
                 </StackPanel>
-                <cf:ColorPickerPopup Grid.Row="1" x:Name="colorPickerPopup" SelectedColor="Yellow">
+                <cf:ColorPickerPopup Grid.Row="1" x:Name="colorPickerPopup" SelectedColor="{Binding PopupSelectedColor,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                     Command="{Binding PopupColorChangeCommand}" ValueChanged="colorPickerPopup_ValueChanged">
                     <cf:ColorPickerPopup.Style>
                         <Style TargetType="cf:ColorPickerPopup">
                             <Setter Property="ColorText" Value="None"/>
@@ -96,7 +97,10 @@
                         </Grid.RowDefinitions>
                         <CheckBox x:Name="ColorCellsCheck" Content="WithoutColorCells" Margin="10"/>
                         <Label Background="{Binding ElementName=colorPicker,Path=SelectedColor,Converter={StaticResource ColorToBrushConverter}}" Margin="10"  Grid.Row="1"/>
-                        <cf:ColorPickerControl x:Name="colorPicker" Grid.Row="2" Width="auto" Height="auto" WithoutColorCells="{Binding ElementName=ColorCellsCheck,Path=IsChecked}"/>
+                        <cf:ColorPickerControl x:Name="colorPicker" Grid.Row="2" Width="auto" Height="auto" WithoutColorCells="{Binding ElementName=ColorCellsCheck,Path=IsChecked}" 
+                                                ValueChanged="colorPicker_ValueChanged" 
+                                                SelectedColor="{Binding SelectedColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                                Command="{Binding ColorChangeCommand}"/>
                     </Grid>
                 </GroupBox>
                 <GroupBox Header="FontPickerControl" Grid.Column="1">

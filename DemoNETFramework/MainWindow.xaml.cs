@@ -1,6 +1,7 @@
 ﻿using ColorFontPickerWPF;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -50,6 +51,16 @@ namespace DemoNETFramework
                 FontSize = 48,
             };
             colorPicker.SelectedColor = Colors.Blue;
+        }
+
+        private void colorPicker_ValueChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        {
+            Debug.WriteLine(colorPicker.SelectedColor);//e.NewValue
+        }
+
+        private void colorPickerPopup_ValueChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        {
+            Debug.WriteLine(colorPickerPopup.ColorTextValue);//e.NewValue
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using ColorFontPickerWPF;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,8 @@ namespace DemoNETCore
         {
             InitializeComponent();
             //PickerLanguageManager.settings.UIculture = new CultureInfo("en-US");
+
+            colorPickerPopup.DataContext = colorPicker.DataContext = new MainViewModel();
         }
 
         private void ColorDialogButton_Click(object sender, RoutedEventArgs e)
@@ -38,7 +41,7 @@ namespace DemoNETCore
 
         private void FontDialogButton_Click(object sender, RoutedEventArgs e)
         {
-            FontDialog fontDialog = new FontDialog(); 
+            FontDialog fontDialog = new FontDialog();
             fontDialog.GetFont(PreviewTextBlock);
             if (fontDialog.ShowDialog() == true)
                 fontDialog.SetFont(PreviewTextBlock);
@@ -52,6 +55,17 @@ namespace DemoNETCore
                 FontSize = 48,
             };
             colorPicker.SelectedColor = Colors.Blue;
+        }
+
+        private void colorPicker_ValueChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        {
+            Debug.WriteLine(colorPicker.SelectedColor);
+            //Debug.WriteLine(e.NewValue);
+        }
+
+        private void colorPickerPopup_ValueChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        {
+            Debug.WriteLine(colorPickerPopup.ColorTextValue);
         }
     }
 
