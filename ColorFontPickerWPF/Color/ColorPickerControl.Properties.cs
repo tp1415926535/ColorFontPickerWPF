@@ -21,7 +21,7 @@ namespace ColorFontPickerWPF
             get { return (Color)GetValue(SelectedColorProperty); }
             set { SetValue(SelectedColorProperty, value); }
         }
-        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(ColorPickerControl), new PropertyMetadata(OnValuePropertyChanged));
+        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(ColorPickerControl), new FrameworkPropertyMetadata(Colors.Transparent, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValuePropertyChanged));
         /// <summary>
         /// Selected colour property change events
         /// 选中颜色属性变更事件
@@ -57,7 +57,7 @@ namespace ColorFontPickerWPF
             get { return (bool)GetValue(WithoutColorCellsProperty); }
             set { SetValue(WithoutColorCellsProperty, value); }
         }
-        public static readonly DependencyProperty WithoutColorCellsProperty = DependencyProperty.Register(nameof(WithoutColorCells), typeof(bool), typeof(ColorPickerControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty WithoutColorCellsProperty = DependencyProperty.Register(nameof(WithoutColorCells), typeof(bool), typeof(ColorPickerControl), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         /// <summary>
         /// Defining value change events
