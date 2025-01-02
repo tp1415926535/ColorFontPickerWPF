@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ColorFontPickerWPF"
         mc:Ignorable="d"
-        Title="{DynamicResource Color}" Height="358" Width="499" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" WindowStyle="ToolWindow">
+        Title="{DynamicResource Color}" Height="350" Width="510" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" WindowStyle="ToolWindow">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition/>

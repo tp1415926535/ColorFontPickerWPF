@@ -18,5 +18,16 @@ namespace ColorFontPickerWPF
     }
 
 
+    /// <summary>
+    /// Type of color text to display
+    /// 显示颜色文本的类型
+    /// </summary>
+    public enum ColorTextFormat
+    {
+        None,
+        RGB,
+        HEX,
+        HSL,
+    }
 
 }

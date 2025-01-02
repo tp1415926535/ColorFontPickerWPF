@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -21,26 +22,27 @@ namespace ColorFontPickerWPF
     /// </summary>
     public partial class ColorPickerPopup : UserControl
     {
-        public ColorTextFormat ColorText
+        /// <summary>
+        /// Get selected color text
+        /// 获取选中颜色文本
+        /// </summary>
+        public string ColorTextValue
         {
-            get { return (ColorTextFormat)GetValue(ColorTextProperty); }
-            set { SetValue(ColorTextProperty, value); }
-        }
-        public static readonly DependencyProperty ColorTextProperty = DependencyProperty.Register("ColorText", typeof(ColorTextFormat), typeof(ColorPickerPopup), new PropertyMetadata(null));
-
-        public Color SelectedColor
-        {
-            get { return (Color)GetValue(SelectedColorProperty); }
-            set { SetValue(SelectedColorProperty, value); }
-        }
-        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color), typeof(ColorPickerPopup), new PropertyMetadata(SelectionChangedEvent));
-
-        private static void SelectionChangedEvent(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var dep = d as ColorPickerPopup;
-            if (dep == null) return;
-            dep.SelectedColor = (Color)e.NewValue;
-            dep.colorPicker.SelectedColor = dep.SelectedColor;
+            get
+            {
+                switch (ColorText)
+                {
+                    case ColorTextFormat.RGB:
+                        return $"RGB({SelectedColor.R},{SelectedColor.G},{SelectedColor.B})";
+                    case ColorTextFormat.HEX:
+                        return new RGB(SelectedColor).ToHEX().Code;
+                    case ColorTextFormat.HSL:
+                        var hsl = new RGB(SelectedColor).ToHSL();
+                        return $"HSL({hsl.H},{hsl.S},{hsl.L})";
+                    default:
+                        return string.Empty;
+                }
+            }
         }
 
         public ColorPickerPopup()
@@ -48,68 +50,15 @@ namespace ColorFontPickerWPF
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Show or close popup
+        /// 打开或关闭popup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Border_MouseUp(object sender, MouseButtonEventArgs e)
         {
             ControlPopup.IsOpen = !ControlPopup.IsOpen;
-        }
-    }
-
-    public enum ColorTextFormat
-    {
-        None,
-        RGB,
-        HEX,
-        HSL,
-    }
-    public class InvertLightColorConverter : IValueConverter
-    {
-        static SolidColorBrush whitebrush = new SolidColorBrush(Colors.White);
-        static SolidColorBrush blackbrush = new SolidColorBrush(Colors.Black);
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value == null)
-                return new SolidColorBrush(Colors.Black);
-            else
-            {
-                SolidColorBrush brush = (SolidColorBrush)value;
-                double grayScale = 0.30 * brush.Color.R + 0.59 * brush.Color.G + 0.11 * brush.Color.B;
-                if (grayScale > 127)
-                    return blackbrush;
-                else
-                    return whitebrush;
-            }
-        }
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return new SolidColorBrush(Colors.Transparent);
-        }
-    }
-    public class ColorToTextConverter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (values.Length != 2) return string.Empty;
-            Color color = (Color)values[0];
-            ColorTextFormat colorTextFormat = (ColorTextFormat)values[1];
-            switch (colorTextFormat)
-            {
-                case ColorTextFormat.None:
-                    return string.Empty;
-                case ColorTextFormat.RGB:
-                    return string.Format("RGB({0},{1},{2})", color.R, color.G, color.B);
-                case ColorTextFormat.HEX:
-                    return new RGB(color).ToHEX().Code;
-                case ColorTextFormat.HSL:
-                    var hsl = new RGB(color).ToHSL();
-                    return string.Format("HSL({0},{1},{2})", hsl.H, hsl.S, hsl.L);
-                default:
-                    return string.Empty;
-            }
-
-        }
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
-        {
-            return null;
         }
     }
 }

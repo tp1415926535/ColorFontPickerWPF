@@ -103,4 +103,65 @@ namespace ColorFontPickerWPF
             return null;
         }
     }
+
+    /// <summary>
+    /// Reverse to black or white based on grayscale
+    /// 根据灰度计算反向黑色或白色
+    /// </summary>
+    public class InvertLightColorConverter : IValueConverter
+    {
+        static SolidColorBrush whitebrush = new SolidColorBrush(Colors.White);
+        static SolidColorBrush blackbrush = new SolidColorBrush(Colors.Black);
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null)
+                return new SolidColorBrush(Colors.Black);
+            else
+            {
+                SolidColorBrush brush = (SolidColorBrush)value;
+                double grayScale = 0.30 * brush.Color.R + 0.59 * brush.Color.G + 0.11 * brush.Color.B;
+                if (grayScale > 127)
+                    return blackbrush;
+                else
+                    return whitebrush;
+            }
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return new SolidColorBrush(Colors.Transparent);
+        }
+    }
+
+
+    /// <summary>
+    /// Color to corresponding formatted text
+    /// 颜色转为对应格式文本
+    /// </summary>
+    public class ColorToTextConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (values.Length != 2) return string.Empty;
+            Color color = (Color)values[0];
+            ColorTextFormat colorTextFormat = (ColorTextFormat)values[1];
+            switch (colorTextFormat)
+            {
+                case ColorTextFormat.None:
+                    return string.Empty;
+                case ColorTextFormat.RGB:
+                    return $"RGB({color.R},{color.G},{color.B})";
+                case ColorTextFormat.HEX:
+                    return new RGB(color).ToHEX().Code;
+                case ColorTextFormat.HSL:
+                    var hsl = new RGB(color).ToHSL();
+                    return $"HSL({hsl.H},{hsl.S},{hsl.L})";
+                default:
+                    return string.Empty;
+            }
+        }
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return null;
+        }
+    }
 }

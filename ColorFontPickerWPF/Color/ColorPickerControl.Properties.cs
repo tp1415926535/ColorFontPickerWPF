@@ -36,21 +36,19 @@ namespace ColorFontPickerWPF
         private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as ColorPickerControl;
-            if (control != null && control.ValueChanged != null)
+            if (control == null || control.ValueChanged == null) return;
+            try
             {
-                try
-                {
-                    //valueChange
-                    control.ValueChanged(control, new RoutedPropertyChangedEventArgs<Color>((Color)e.OldValue, (Color)e.NewValue));
-                    //Command
-                    if (control.Command != null && control.Command.CanExecute(control.CommandParameter))
-                        control.Command.Execute(control.CommandParameter);
-                    //Text
-                    if (!control.changing)
-                        control.ApplyChangeToText(ColorFormat.None);
-                }
-                catch { }
+                //valueChange
+                control.ValueChanged(control, new RoutedPropertyChangedEventArgs<Color>((Color)e.OldValue, (Color)e.NewValue));
+                //Command
+                if (control.Command != null && control.Command.CanExecute(control.CommandParameter))
+                    control.Command.Execute(control.CommandParameter);
+                //Text
+                if (!control.changing)
+                    control.ApplyChangeToText(ColorFormat.None);
             }
+            catch { }
         }
 
 
