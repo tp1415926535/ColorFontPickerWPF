@@ -15,7 +15,8 @@ namespace ColorFontPickerWPF
 			get { return (ColorTextFormat)GetValue(ColorTextProperty); }
 			set { SetValue(ColorTextProperty, value); }
 		}
-		public static readonly DependencyProperty ColorTextProperty = DependencyProperty.Register("ColorText", typeof(ColorTextFormat), typeof(ColorPickerPopup), new PropertyMetadata(null));
+        public static readonly DependencyProperty ColorTextProperty = DependencyProperty.Register(nameof(ColorText), typeof(ColorTextFormat), typeof(ColorPickerPopup), new PropertyMetadata(null));
+
 
 		/// <summary>
 		/// Selected Color
@@ -26,8 +27,7 @@ namespace ColorFontPickerWPF
 			get { return (Color)GetValue(SelectedColorProperty); }
 			set { SetValue(SelectedColorProperty, value); }
 		}
-		public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color), typeof(ColorPickerPopup), new PropertyMetadata(SelectionChangedEvent));
-
+        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(ColorPickerPopup), new PropertyMetadata(SelectionChangedEvent));
 		/// <summary>
 		/// Selected colour property change events
 		/// 选中颜色属性变更事件
@@ -37,13 +37,14 @@ namespace ColorFontPickerWPF
 		private static void SelectionChangedEvent(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
 			var control = d as ColorPickerPopup;
-			if (control == null || control.ValueChanged == null) return;
+			if (control == null) return;
 			try
 			{
 				//control.SelectedColor = control.colorPicker.SelectedColor = (Color)e.NewValue;
 				control.colorPicker.SelectedColor = (Color)e.NewValue;
-				//valueChange
-				control.ValueChanged(control, new RoutedPropertyChangedEventArgs<Color>((Color)e.OldValue, (Color)e.NewValue));
+                //valueChange
+                if (control.ValueChanged != null)
+                    control.ValueChanged(control, new RoutedPropertyChangedEventArgs<Color>((Color)e.OldValue, (Color)e.NewValue));
 				//Command
 				if (control.Command != null && control.Command.CanExecute(control.CommandParameter))
 					control.Command.Execute(control.CommandParameter);
@@ -70,7 +71,7 @@ namespace ColorFontPickerWPF
 		/// The value change provides the Command
 		/// 值改变提供Command
 		/// </summary>
-		public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command", typeof(ICommand), typeof(ColorPickerPopup), new PropertyMetadata(null));
+		public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(ColorPickerPopup), new PropertyMetadata(null));
 
 		/// <summary>
 		/// CommandParameter
@@ -84,7 +85,7 @@ namespace ColorFontPickerWPF
 		/// Allow incoming command parameters
 		/// 允许附带命令参数
 		/// </summary>
-		public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register("CommandParameter", typeof(object), typeof(ColorPickerPopup), new PropertyMetadata(null));
+		public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(nameof(CommandParameter), typeof(object), typeof(ColorPickerPopup), new PropertyMetadata(null));
 
 	}
 }

@@ -21,12 +21,7 @@ namespace ColorFontPickerWPF
             get { return (Color)GetValue(SelectedColorProperty); }
             set { SetValue(SelectedColorProperty, value); }
         }
-
-        /// <summary>
-        /// Selected colour properties
-        /// 选中颜色属性
-        /// </summary>
-        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register("SelectedColor", typeof(Color), typeof(ColorPickerControl), new PropertyMetadata(OnValuePropertyChanged));
+        public static readonly DependencyProperty SelectedColorProperty = DependencyProperty.Register(nameof(SelectedColor), typeof(Color), typeof(ColorPickerControl), new PropertyMetadata(OnValuePropertyChanged));
         /// <summary>
         /// Selected colour property change events
         /// 选中颜色属性变更事件
@@ -36,11 +31,12 @@ namespace ColorFontPickerWPF
         private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as ColorPickerControl;
-            if (control == null || control.ValueChanged == null) return;
+            if (control == null) return;
             try
             {
                 //valueChange
-                control.ValueChanged(control, new RoutedPropertyChangedEventArgs<Color>((Color)e.OldValue, (Color)e.NewValue));
+                if (control.ValueChanged != null)
+                    control.ValueChanged(control, new RoutedPropertyChangedEventArgs<Color>((Color)e.OldValue, (Color)e.NewValue));
                 //Command
                 if (control.Command != null && control.Command.CanExecute(control.CommandParameter))
                     control.Command.Execute(control.CommandParameter);
@@ -61,12 +57,7 @@ namespace ColorFontPickerWPF
             get { return (bool)GetValue(WithoutColorCellsProperty); }
             set { SetValue(WithoutColorCellsProperty, value); }
         }
-        /// <summary>
-        /// Whether to display the colour grid attribute
-        /// 是否显示颜色格子属性
-        /// </summary>
-        public static readonly DependencyProperty WithoutColorCellsProperty = DependencyProperty.Register("WithoutColorCells", typeof(bool), typeof(ColorPickerControl), new PropertyMetadata(null));
-
+        public static readonly DependencyProperty WithoutColorCellsProperty = DependencyProperty.Register(nameof(WithoutColorCells), typeof(bool), typeof(ColorPickerControl), new PropertyMetadata(null));
 
         /// <summary>
         /// Defining value change events
@@ -89,7 +80,7 @@ namespace ColorFontPickerWPF
         /// The value change provides the Command
         /// 值改变提供Command
         /// </summary>
-        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command", typeof(ICommand), typeof(ColorPickerControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(nameof(Command), typeof(ICommand), typeof(ColorPickerControl), new PropertyMetadata(null));
 
         /// <summary>
         /// CommandParameter
@@ -103,6 +94,6 @@ namespace ColorFontPickerWPF
         /// Allow incoming command parameters
         /// 允许附带命令参数
         /// </summary>
-        public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register("CommandParameter", typeof(object), typeof(ColorPickerControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register(nameof(CommandParameter), typeof(object), typeof(ColorPickerControl), new PropertyMetadata(null));
     }
 }

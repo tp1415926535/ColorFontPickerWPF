@@ -52,7 +52,8 @@ namespace ColorFontPickerWPF
             SaveItems.DataContext = saveColors;
             for (int i = 0; i < 8; i++)
                 saveColors.Add(Colors.White);
-            //var currentCulture = PickerLanguageManager.Settings.UIculture;
+
+            var currentCulture = PickerLanguageManager.Settings.UIculture;//Setting the default language resource 设置默认的语言资源
         }
 
         /// <summary>
