@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net472</TargetFrameworks>
+    <TargetFrameworks>net6.0-windows;netcoreapp3.1;net472</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <Authors>纵码过河山</Authors>
     <Company>纵码过河山</Company>
@@ -10,11 +10,12 @@
     <PackageProjectUrl>https://github.com/tp1415926535/ColorFontPickerWPF</PackageProjectUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.4</Version>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="ColorPickerPopup.Properties.cs" />
+    <Compile Remove="FontPickerPopup.Properties.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +24,7 @@
       <PackagePath></PackagePath>
     </None>
     <None Include="Color\ColorPickerPopup.Properties.cs" />
+    <None Include="Font\FontPickerPopup.Properties.cs" />
   </ItemGroup>
 
 </Project>

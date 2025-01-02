@@ -19,88 +19,63 @@ namespace ColorFontPickerWPF
     /// </summary>
     public partial class FontPickerPopup : UserControl
     {
-        public string FontText
-        {
-            get { return (string)GetValue(FontTextProperty); }
-            set { SetValue(FontTextProperty, value); }
-        }
-        public static readonly DependencyProperty FontTextProperty = DependencyProperty.Register("FontText", typeof(string), typeof(FontPickerPopup), new PropertyMetadata(null));
-
-        public Font SelectedFont
-        {
-            get { return (Font)GetValue(SelectedFontProperty); }
-            set { SetValue(SelectedFontProperty, value); }
-        }
-        public static readonly DependencyProperty SelectedFontProperty = DependencyProperty.Register("SelectedFont", typeof(Font), typeof(FontPickerPopup), new PropertyMetadata(SelectionChangedEvent));
-
-        private static void SelectionChangedEvent(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var dep = d as FontPickerPopup;
-            if (dep == null) return;
-            dep.SelectedFont = (Font)e.NewValue;
-            dep.fontPicker.SelectedFont = dep.SelectedFont;
-        }
-
         public FontPickerPopup()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Show or close popup
+        /// 打开或关闭popup
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Border_MouseUp(object sender, MouseButtonEventArgs e)
         {
             ControlPopup.IsOpen = !ControlPopup.IsOpen;
             fontPicker.ScrollToSelection();
         }
+
+
+        #region External methods 对外提供方法
+        /// <summary>
+        /// Get the font from the specified control as the selected font
+        /// 从指定控件获取字体为当前选中字体
+        /// </summary>
+        /// <param name="control"></param>
         public void GetFont(Control control)
         {
             SelectedFont = FontHelper.GetFont(control);
         }
+        /// <summary>
+        /// Get the font from the specified textblock as the selected font
+        /// 从指定文本框获取字体为当前选中字体
+        /// </summary>
+        /// <param name="textBlock"></param>
         public void GetFont(TextBlock textBlock)
         {
             SelectedFont = FontHelper.GetFont(textBlock);
         }
+        /// <summary>
+        /// Sets the selected font to the font of the specified control
+        /// 将当前选中字体设置到指定控件的字体
+        /// </summary>
+        /// <param name="control"></param>
         public void SetFont(Control control)
         {
             FontHelper.SetFont(control, SelectedFont);
         }
+        /// <summary>
+        /// Sets the selected font to the font of the specified textblock
+        /// 将当前选中字体设置到指定控件的文本框
+        /// </summary>
+        /// <param name="textblock"></param>
         public void SetFont(TextBlock textblock)
         {
             FontHelper.SetFont(textblock, SelectedFont);
         }
-    }
-    public class SizeFormatConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value == null)
-                return value;
-            else
-            {
-                string str = (string)value;
+        #endregion
 
-                return str;
-            }
-        }
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return new SolidColorBrush(Colors.Transparent);
-        }
     }
-    public class FontTextConverter : IMultiValueConverter
-    {
-        public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (values.Length != 2|| !(values[1] is double)) return string.Empty;
-            string fontText = (string)values[0];
-            double fontsize = (double)values[1];
-            if (string.IsNullOrEmpty(fontText))
-                return "FontSize: " + fontsize + "px";
-            else
-                return fontText.Replace("{fontsize}", fontsize.ToString());
-        }
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
-        {
-            return null;
-        }
-    }
+    
 }

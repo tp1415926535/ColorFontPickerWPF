@@ -30,4 +30,16 @@ namespace ColorFontPickerWPF
         HSL,
     }
 
+    /// <summary>
+    /// Text Decoration Type
+    /// 文本装饰类型
+    /// </summary>
+    public enum TextDecorationType
+    {
+        None,
+        OverLine,
+        Strikethrough,
+        Baseline,
+        Underline,
+    }
 }

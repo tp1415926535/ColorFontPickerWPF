@@ -15,7 +15,7 @@ namespace ColorFontPickerWPF
             {
                 FontFamily = control.FontFamily,
                 FontSize = control.FontSize,
-                FamilyTypeface = new FamilyTypeface { Style = control.FontStyle, Stretch = control.FontStretch, Weight = control.FontWeight }
+                FontTypeFace = new FontTypeFace { Style = control.FontStyle, Stretch = control.FontStretch, Weight = control.FontWeight }
             };
             if (control is TextBox)
             {
@@ -37,7 +37,7 @@ namespace ColorFontPickerWPF
             {
                 FontFamily = textBlock.FontFamily,
                 FontSize = textBlock.FontSize,
-                FamilyTypeface = new FamilyTypeface { Style = textBlock.FontStyle, Stretch = textBlock.FontStretch, Weight = textBlock.FontWeight }
+                FontTypeFace = new FontTypeFace { Style = textBlock.FontStyle, Stretch = textBlock.FontStretch, Weight = textBlock.FontWeight }
             };
             if (textBlock.TextDecorations == TextDecorations.OverLine)
                 font.TextDecorationType = TextDecorationType.OverLine;
@@ -53,11 +53,11 @@ namespace ColorFontPickerWPF
         {
             control.FontFamily = font.FontFamily;
             control.FontSize = font.FontSize;
-            if (font.FamilyTypeface != null)
+            if (font.FontTypeFace != null)
             {
-                control.FontWeight = font.FamilyTypeface.Weight;
-                control.FontStyle = font.FamilyTypeface.Style;
-                control.FontStretch = font.FamilyTypeface.Stretch;
+                control.FontWeight = font.FontTypeFace.Weight;
+                control.FontStyle = font.FontTypeFace.Style;
+                control.FontStretch = font.FontTypeFace.Stretch;
             }
             if (control is TextBox)
             {
@@ -86,11 +86,11 @@ namespace ColorFontPickerWPF
         {
             textblock.FontFamily = font.FontFamily;
             textblock.FontSize = font.FontSize;
-            if (font.FamilyTypeface != null)
+            if (font.FontTypeFace != null)
             {
-                textblock.FontWeight = font.FamilyTypeface.Weight;
-                textblock.FontStyle = font.FamilyTypeface.Style;
-                textblock.FontStretch = font.FamilyTypeface.Stretch;
+                textblock.FontWeight = font.FontTypeFace.Weight;
+                textblock.FontStyle = font.FontTypeFace.Style;
+                textblock.FontStretch = font.FontTypeFace.Stretch;
             }
             switch (font.TextDecorationType)
             {

@@ -164,4 +164,73 @@ namespace ColorFontPickerWPF
             return null;
         }
     }
+
+
+
+    /// <summary>
+    /// typeFace转字体
+    /// </summary>
+    public class FontTypeFaceConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            FontTypeFace t = (FontTypeFace)value;
+            var typeFace = new FontTypeFace
+            {
+                Stretch = t.Stretch,
+                Style = t.Style,
+                Weight = t.Weight,
+            };
+            return typeFace;
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            FamilyTypeface t = (FamilyTypeface)value;
+            var typeFace = new FontTypeFace
+            {
+                Stretch = t.Stretch,
+                Style = t.Style,
+                Weight = t.Weight,
+            };
+            return typeFace;
+        }
+    }
+
+
+    public class SizeFormatConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null)
+                return value;
+            else
+            {
+                string str = (string)value;
+                return str;
+            }
+        }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+    }
+
+
+    public class FontTextConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (values.Length != 2 || !(values[1] is double)) return string.Empty;
+            string fontText = (string)values[0];
+            double fontsize = (double)values[1];
+            if (string.IsNullOrEmpty(fontText))
+                return "FontSize: " + fontsize + "px";
+            else
+                return fontText.Replace("{fontsize}", fontsize.ToString());
+        }
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return null;
+        }
+    }
 }

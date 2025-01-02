@@ -5,6 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ColorFontPickerWPF"
              mc:Ignorable="d" Height="400" Width="500" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <local:FontTypeFaceConverter x:Key="FontTypeFaceConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition MinHeight="80"/>
@@ -41,7 +44,7 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBox x:Name="FontTextbox"  Margin="0,0,0,5" HorizontalContentAlignment="Left" Text="{Binding ElementName=FontSelector,Path=SelectedItem}" TextChanged="FontTextbox_TextChanged"/>
+                        <TextBox x:Name="FontTextbox"  Margin="0,0,0,5" HorizontalContentAlignment="Left" Text="{Binding FontFamilyText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextChanged="FontTextbox_TextChanged"/>
                         <ListBox x:Name="FontSelector" Grid.Row="1" ItemsSource="{x:Static Fonts.SystemFontFamilies}" ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                              SelectedItem="{Binding SelectedFont.FontFamily, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectionChanged="FontSelector_SelectionChanged">
                             <ListBox.ItemTemplate>
@@ -64,7 +67,7 @@
                         <ListBox x:Name="TypefaceSelector" Grid.Row="1"
                                  ItemsSource="{Binding SelectedItem.FamilyTypefaces, ElementName=FontSelector}" 
                                  DisplayMemberPath="AdjustedFaceNames[en-US]" SelectedIndex="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
-                             SelectedItem="{Binding SelectedFont.FamilyTypeface, RelativeSource={RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor},Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                                 SelectedItem="{Binding FamilyTypeFace,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectionChanged="TypefaceSelector_SelectionChanged"/>
                     </Grid>
                 </Border>
                 <Border Grid.Row="1" Grid.Column="2">
@@ -75,7 +78,8 @@
                         </Grid.RowDefinitions>
                         <TextBox x:Name="SizeTextbox"  Margin="0,0,0,5" HorizontalContentAlignment="Left" TextChanged="SizeTextbox_TextChanged" MaxLength="3"/>
                         <!--Text={Binding ElementName=SizeSelector,Path=SelectedItem,Converter={StaticResource TextToDoubleConverter}}" /> 单向绑定手动后失效，双向绑定实时更新-->
-                        <ListBox x:Name="SizeSelector" Grid.Row="1" DisplayMemberPath ="Key" SelectionChanged="SizeSelector_SelectionChanged" />
+                        <ListBox x:Name="SizeSelector" Grid.Row="1" DisplayMemberPath ="Key" SelectedValuePath="Key"
+                                 SelectionChanged="SizeSelector_SelectionChanged" />
                     </Grid>
                 </Border>
             </Grid>
@@ -203,7 +207,7 @@
                                     <DataTrigger Binding="{Binding ElementName=LanguageCombo,Path=SelectedItem.Tag}" Value="sv">
                                         <Setter Property="Text" Value="Val av typsnitt"/>
                                     </DataTrigger>
-                                    
+
                                     <DataTrigger Binding="{Binding ElementName=OverLineRadio,Path=IsChecked}" Value="True">
                                         <Setter Property="TextDecorations" Value="OverLine"/>
                                     </DataTrigger>
