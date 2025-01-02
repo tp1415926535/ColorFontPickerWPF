@@ -19,19 +19,9 @@ namespace ColorFontPickerWPF
         public Color SelectedColor
         {
             get { return (Color)GetValue(SelectedColorProperty); }
-            set
-            {
-                SetValue(SelectedColorProperty, value);
-                if (changing) return;
-                changing = true;
-                try
-                {
-                    ApplyChangeToText(ColorFormat.None);
-                }
-                catch { }
-                changing = false;
-            }
+            set { SetValue(SelectedColorProperty, value); }
         }
+
         /// <summary>
         /// Selected colour properties
         /// 选中颜色属性
@@ -46,8 +36,21 @@ namespace ColorFontPickerWPF
         private static void OnValuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as ColorPickerControl;
-            if (control != null && control.ValueChanged != null)//触发 ValueChanged
-                control.ValueChanged(control, new RoutedPropertyChangedEventArgs<Color>((Color)e.OldValue, (Color)e.NewValue));
+            if (control != null && control.ValueChanged != null)
+            {
+                try
+                {
+                    //valueChange
+                    control.ValueChanged(control, new RoutedPropertyChangedEventArgs<Color>((Color)e.OldValue, (Color)e.NewValue));
+                    //Command
+                    if (control.Command != null && control.Command.CanExecute(control.CommandParameter))
+                        control.Command.Execute(control.CommandParameter);
+                    //Text
+                    if (!control.changing)
+                        control.ApplyChangeToText(ColorFormat.None);
+                }
+                catch { }
+            }
         }
 
 
@@ -74,39 +77,34 @@ namespace ColorFontPickerWPF
         public event RoutedPropertyChangedEventHandler<Color> ValueChanged;
 
 
-        /*
-        // 定义命令依赖属性
-        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command",typeof(ICommand),typeof(MyCustomControl),
-                new PropertyMetadata(null));
 
-        // 定义命令参数依赖属性（如果需要）
-        public static readonly DependencyProperty CommandParameterProperty =
-            DependencyProperty.Register(
-                "CommandParameter",
-                typeof(object),
-                typeof(MyCustomControl),
-                new PropertyMetadata(null));
 
-        // CLR包装器
+        /// <summary>
+        /// Command
+        /// </summary>
         public ICommand Command
         {
             get { return (ICommand)GetValue(CommandProperty); }
             set { SetValue(CommandProperty, value); }
         }
+        /// <summary>
+        /// The value change provides the Command
+        /// 值改变提供Command
+        /// </summary>
+        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command", typeof(ICommand), typeof(ColorPickerControl), new PropertyMetadata(null));
 
+        /// <summary>
+        /// CommandParameter
+        /// </summary>
         public object CommandParameter
         {
             get { return GetValue(CommandParameterProperty); }
             set { SetValue(CommandParameterProperty, value); }
         }
-
-        // 控件内部的逻辑，例如响应用户的某个动作
-        private void OnSomeUserAction()
-        {
-            if (Command != null && Command.CanExecute(CommandParameter))
-            {
-                Command.Execute(CommandParameter);
-            }
-        }*/
+        /// <summary>
+        /// Allow incoming command parameters
+        /// 允许附带命令参数
+        /// </summary>
+        public static readonly DependencyProperty CommandParameterProperty = DependencyProperty.Register("CommandParameter", typeof(object), typeof(ColorPickerControl), new PropertyMetadata(null));
     }
 }
