@@ -514,7 +514,7 @@ public enum TextDecorationType
 > 
 > 比如绑定到 FontPickerControl：
 > ```xml
-> <TextBlock  cf:FontExtension.FontData="{Binding > SelectedFont,ElementName=fontPicker,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+> <TextBlock  cf:FontExtension.FontData="{Binding SelectedFont,ElementName=fontPicker,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
 > ```
 > 或者绑定到 ViewModel 的 Font 实体：
 > ```xml
