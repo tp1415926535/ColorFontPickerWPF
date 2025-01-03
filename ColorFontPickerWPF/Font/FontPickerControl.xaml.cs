@@ -285,7 +285,7 @@ namespace ColorFontPickerWPF
                 }
             }
             double value = 0;
-            if (double.TryParse(SizeTextbox.Text, out value))
+            if (double.TryParse(SizeTextbox.Text, out value)&& value > 0)
             {
                 SelectedFont.FontSize = value;
                 SizeSelector.SelectedValue = fontSizeDic.FirstOrDefault(x => x.Value.Equals(SelectedFont.FontSize)).Key;

@@ -33,9 +33,18 @@ namespace ColorFontPickerWPF
         private void Border_MouseUp(object sender, MouseButtonEventArgs e)
         {
             ControlPopup.IsOpen = !ControlPopup.IsOpen;
-            fontPicker.ScrollToSelection();
         }
 
+        /// <summary>
+        /// popup opened
+        /// popup打开
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ControlPopup_Opened(object sender, EventArgs e)
+        {
+            fontPicker.ScrollToSelection();
+        }
 
         #region External methods 对外提供方法
         /// <summary>

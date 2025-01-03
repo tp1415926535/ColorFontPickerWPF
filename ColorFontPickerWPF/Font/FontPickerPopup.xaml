@@ -52,7 +52,7 @@
                 </ToggleButton>
             </Grid>
         </Border>
-        <Popup x:Name="ControlPopup" StaysOpen="False" AllowsTransparency="True">
+        <Popup x:Name="ControlPopup" StaysOpen="False" AllowsTransparency="True" Opened="ControlPopup_Opened">
             <Grid>
                 <Border Background="Gray" Margin="5">
                     <Border.Effect>

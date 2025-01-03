@@ -23,8 +23,8 @@ namespace ColorFontPickerWPF
 
         private string _FontFamilyText;
         /// <summary>
-        /// font family text
-        /// 字体文本
+        /// font family text, to prevent empty or unrecognizable font names
+        /// 字体文本，防止出现空的或者无法识别的字体名
         /// </summary>
         public string FontFamilyText
         {
@@ -38,8 +38,8 @@ namespace ColorFontPickerWPF
 
         private FamilyTypeface _FamilyTypeFace = new FamilyTypeface();
         /// <summary>
-        /// font family Typeface
-        /// 字体样式
+        /// font family Typeface, used to bind font-native data and transform entity
+        /// 字体样式，用于绑定字体原生数据并转换实体
         /// </summary>
         public FamilyTypeface FamilyTypeFace
         {

@@ -48,7 +48,7 @@ namespace DemoNETFramework
             fontPicker.SelectedFont = new Font
             {
                 FontFamily = new FontFamily("Microsoft YaHei UI"),
-                FontSize = 48,
+                FontSize = 12,
             };
             colorPicker.SelectedColor = Colors.Blue;
         }
