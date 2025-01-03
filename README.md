@@ -167,8 +167,7 @@ var fontPicker = new FontPickerControl();
 /*//In need
 fontPicker.SelectedFont = new Font()
 { 
-    FontFamily = new FontFamily("Microsoft YaHei UI"), 
-    FamilyTypeface = new FamilyTypeface(),
+    FontFamily = new FontFamily("Microsoft YaHei UI"),
     FontSize = 12
 }; 
 //fontPicker.Get(textBlock);//Or use a wrapped method to get the control's font directly
@@ -214,7 +213,6 @@ var fontPicker = new FontPickerPopup();
 fontPicker.SelectedFont = new Font()
 { 
     FontFamily = new FontFamily("Microsoft YaHei UI"), 
-    FamilyTypeface = new FamilyTypeface(),
     FontSize = 12
 }; 
 //fontPicker.Get(textBlock);// or get font from control
@@ -432,7 +430,6 @@ var fontPicker = new FontPickerControl();
 fontPicker.SelectedFont = new Font()
 { 
     FontFamily = new FontFamily("Microsoft YaHei UI"), 
-    FamilyTypeface = new FamilyTypeface(),
     FontSize = 12
 }; 
 //fontPicker.Get(textBlock);//或者用封装的方法直接获取控件字体
@@ -479,7 +476,6 @@ var fontPicker = new FontPickerPopup();
 fontPicker.SelectedFont = new Font()
 { 
     FontFamily = new FontFamily("Microsoft YaHei UI"), 
-    FamilyTypeface = new FamilyTypeface(),
     FontSize = 12
 }; 
 //fontPicker.Get(textBlock);//或者用封装的方法直接获取控件字体
