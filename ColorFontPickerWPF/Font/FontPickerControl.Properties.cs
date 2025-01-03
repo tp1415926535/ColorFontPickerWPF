@@ -22,7 +22,7 @@ namespace ColorFontPickerWPF
             get { return (Font)GetValue(SelectedFontProperty); }
             set { SetValue(SelectedFontProperty, value); }
         }
-        public static readonly DependencyProperty SelectedFontProperty = DependencyProperty.Register(nameof(SelectedFont), typeof(Font), typeof(FontPickerControl), new FrameworkPropertyMetadata( OnValuePropertyChanged));
+        public static readonly DependencyProperty SelectedFontProperty = DependencyProperty.Register(nameof(SelectedFont), typeof(Font), typeof(FontPickerControl), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValuePropertyChanged));
         /// <summary>
         /// Selected font property change events
         /// 选中字体属性变更事件
@@ -90,7 +90,7 @@ namespace ColorFontPickerWPF
             get { return (bool)GetValue(WithoutDecorationsProperty); }
             set { SetValue(WithoutDecorationsProperty, value); }
         }
-        public static readonly DependencyProperty WithoutDecorationsProperty = DependencyProperty.Register(nameof(WithoutDecorations), typeof(bool), typeof(FontPickerControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty WithoutDecorationsProperty = DependencyProperty.Register(nameof(WithoutDecorations), typeof(bool), typeof(FontPickerControl), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         /// <summary>
         /// Whether to hide the preview
@@ -101,7 +101,7 @@ namespace ColorFontPickerWPF
             get { return (bool)GetValue(WithoutPreviewProperty); }
             set { SetValue(WithoutPreviewProperty, value); }
         }
-        public static readonly DependencyProperty WithoutPreviewProperty = DependencyProperty.Register(nameof(WithoutPreviewRow), typeof(bool), typeof(FontPickerControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty WithoutPreviewProperty = DependencyProperty.Register(nameof(WithoutPreviewRow), typeof(bool), typeof(FontPickerControl), new FrameworkPropertyMetadata(false,FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
 
 
