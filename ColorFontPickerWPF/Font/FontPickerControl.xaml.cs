@@ -66,9 +66,11 @@ namespace ColorFontPickerWPF
         public FontPickerControl()
         {
             InitializeComponent();
+            //Setting the default language resource 设置默认的语言资源
+            var currentCulture = PickerLanguageManager.Settings.UIculture;
 
             //Convert font name to current language text. 将字体名称转为当前语言文本
-            var language = XmlLanguage.GetLanguage(CultureInfo.CurrentUICulture.Name);
+            var language = XmlLanguage.GetLanguage(currentCulture.Name);//CultureInfo.CurrentUICulture
             var list = Fonts.SystemFontFamilies.Select(font => font.FamilyNames.ContainsKey(language) && !string.IsNullOrEmpty(font.FamilyNames[language]) ?
                                                                 new FontFamily(font.FamilyNames[language]) : font);
 
@@ -81,8 +83,6 @@ namespace ColorFontPickerWPF
             SizeSelector.ItemsSource = fontSizeDic;
             TypefaceSelector.DataContext = FontTextbox.DataContext = vm;
 
-            //Setting the default language resource 设置默认的语言资源
-            var currentCulture = PickerLanguageManager.Settings.UIculture;
             try
             {
                 //Settings Example of the current language. 设置当前语言示例
