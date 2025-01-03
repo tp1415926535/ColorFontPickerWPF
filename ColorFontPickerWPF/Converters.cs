@@ -197,25 +197,10 @@ namespace ColorFontPickerWPF
     }
 
 
-    public class SizeFormatConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value == null)
-                return value;
-            else
-            {
-                string str = (string)value;
-                return str;
-            }
-        }
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return null;
-        }
-    }
-
-
+    /// <summary>
+    /// Replace {fontsize} with actual font size
+    /// 将{fontsize}替换为实际字号
+    /// </summary>
     public class FontTextConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)

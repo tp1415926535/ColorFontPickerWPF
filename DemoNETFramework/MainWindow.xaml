@@ -72,6 +72,7 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1" Margin="5">
                     <TextBlock Text="FontText:" VerticalAlignment="Center" Margin="0,0,5,0"/>
                     <TextBox x:Name="fontPopupText"  Margin="5" MinWidth="100" Text="字体大小：{fontsize}px"/>
+                    <TextBlock Text="'{fontsize}'will be replaced with the real size." VerticalAlignment="Center" Opacity="0.5" FontSize="10"/>
                 </StackPanel>
                 <cf:FontPickerPopup x:Name="fontPickerPopup" Grid.Column="1" Grid.Row="1" FontText="{Binding ElementName=fontPopupText,Path=Text}" />
             </Grid>
@@ -110,14 +111,35 @@
                             <CheckBox x:Name="DecorationCheck" Content="WithoutDecoration" Margin="0,0,10,0" />
                             <CheckBox x:Name="PreviewCheck" Content="WithoutPreviewRow"/>
                         </StackPanel>
-                        <Grid Grid.Row="1" Height="60">
+                        <StackPanel Grid.Row="1" Height="60" Orientation="Horizontal" HorizontalAlignment="Center">
                             <TextBlock Text="Test" HorizontalAlignment="Center" VerticalAlignment="Center"
-                           FontFamily="{Binding SelectedFont.FontFamily,ElementName=fontPicker}"
-                           FontStretch="{Binding Path=SelectedFont.FamilyTypeface.Stretch,ElementName=fontPicker}"
-                           FontWeight="{Binding Path=SelectedFont.FamilyTypeface.Weight,ElementName=fontPicker}"
-                           FontStyle="{Binding Path=SelectedFont.FamilyTypeface.Style,ElementName=fontPicker}"
-                           FontSize="{Binding Path=SelectedFont.FontSize,ElementName=fontPicker}"/>
-                        </Grid>
+                                   FontFamily="{Binding SelectedFont.FontFamily,ElementName=fontPicker}"
+                                   FontStretch="{Binding Path=SelectedFont.FontTypeFace.Stretch,ElementName=fontPicker}"
+                                   FontWeight="{Binding Path=SelectedFont.FontTypeFace.Weight,ElementName=fontPicker}"
+                                   FontStyle="{Binding Path=SelectedFont.FontTypeFace.Style,ElementName=fontPicker}"
+                                   FontSize="{Binding Path=SelectedFont.FontSize,ElementName=fontPicker}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=SelectedFont.TextDecorationType,ElementName=fontPicker}" Value="OverLine">
+                                                <Setter Property="TextDecorations" Value="OverLine"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=SelectedFont.TextDecorationType,ElementName=fontPicker}" Value="Strikethrough">
+                                                <Setter Property="TextDecorations" Value="Strikethrough"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=SelectedFont.TextDecorationType,ElementName=fontPicker}" Value="Baseline">
+                                                <Setter Property="TextDecorations" Value="Baseline"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=SelectedFont.TextDecorationType,ElementName=fontPicker}" Value="Underline">
+                                                <Setter Property="TextDecorations" Value="Underline"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock Text="TestBindExtProperty" VerticalAlignment="Center" Margin="5"
+                                       cf:FontExtension.FontData="{Binding SelectedFont,ElementName=fontPicker,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
                         <cf:FontPickerControl x:Name="fontPicker" Grid.Row="2" Width="auto" Height="auto" WithoutDecorations="{Binding ElementName=DecorationCheck,Path=IsChecked}" 
                                               WithoutPreviewRow="{Binding ElementName=PreviewCheck,Path=IsChecked}"/>
                     </Grid>

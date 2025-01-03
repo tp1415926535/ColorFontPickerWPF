@@ -4,13 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cf="clr-namespace:ColorFontPickerWPF;assembly=ColorFontPickerWPF"
-        xmlns:local="clr-namespace:DemoNETCore"
         mc:Ignorable="d"
         Title="MainWindow" Height="669" Width="1188" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <cf:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
     </Window.Resources>
-    <Grid Margin="10">
+    <Grid x:Name="MainGrid" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -51,7 +50,7 @@
                         <ComboBoxItem Content="HSL"/>
                     </ComboBox>
                 </StackPanel>
-                <cf:ColorPickerPopup Grid.Row="1" x:Name="colorPickerPopup" SelectedColor="{Binding PopupSelectedColor,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                <cf:ColorPickerPopup Grid.Row="1" x:Name="colorPickerPopup" SelectedColor="{Binding PopupSelectedColor}"
                                      Command="{Binding PopupColorChangeCommand}" ValueChanged="colorPickerPopup_ValueChanged">
                     <cf:ColorPickerPopup.Style>
                         <Style TargetType="cf:ColorPickerPopup">
@@ -73,8 +72,10 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1" Margin="5">
                     <TextBlock Text="FontText:" VerticalAlignment="Center" Margin="0,0,5,0"/>
                     <TextBox x:Name="fontPopupText"  Margin="5" MinWidth="100" />
+                    <TextBlock Text="'{fontsize}'will be replaced with the real size." VerticalAlignment="Center" Opacity="0.5" FontSize="10"/>
                 </StackPanel>
-                <cf:FontPickerPopup x:Name="fontPickerPopup" Grid.Column="1" Grid.Row="1" FontText="{Binding ElementName=fontPopupText,Path=Text}" />
+                <cf:FontPickerPopup x:Name="fontPickerPopup" Grid.Column="1" Grid.Row="1" FontText="{Binding ElementName=fontPopupText,Path=Text}"
+                                    ValueChanged="fontPickerPopup_ValueChanged" SelectedFont="{Binding PopupSelectedFont}"/>
             </Grid>
         </GroupBox>
         <GroupBox  Header="UserControl" Grid.Row="2" Margin="0,10,0,0">
@@ -97,9 +98,9 @@
                         </Grid.RowDefinitions>
                         <CheckBox x:Name="ColorCellsCheck" Content="WithoutColorCells" Margin="10"/>
                         <Label Background="{Binding ElementName=colorPicker,Path=SelectedColor,Converter={StaticResource ColorToBrushConverter}}" Margin="10"  Grid.Row="1"/>
-                        <cf:ColorPickerControl x:Name="colorPicker" Grid.Row="2" Width="auto" Height="auto" WithoutColorCells="{Binding ElementName=ColorCellsCheck,Path=IsChecked}" 
+                        <cf:ColorPickerControl x:Name="colorPicker" Grid.Row="2" Width="Auto" Height="Auto" WithoutColorCells="{Binding ElementName=ColorCellsCheck,Path=IsChecked}" 
                                                 ValueChanged="colorPicker_ValueChanged" 
-                                                SelectedColor="{Binding SelectedColor,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                                                SelectedColor="{Binding SelectedColor}" 
                                                 Command="{Binding ColorChangeCommand}"/>
                     </Grid>
                 </GroupBox>
@@ -114,16 +115,41 @@
                             <CheckBox x:Name="DecorationCheck" Content="WithoutDecoration" Margin="0,0,10,0" />
                             <CheckBox x:Name="PreviewCheck" Content="WithoutPreviewRow"/>
                         </StackPanel>
-                        <Grid Grid.Row="1" Height="60">
-                            <TextBlock Text="Test" HorizontalAlignment="Center" VerticalAlignment="Center"
-                           FontFamily="{Binding SelectedFont.FontFamily,ElementName=fontPicker}"
-                           FontStretch="{Binding Path=SelectedFont.FamilyTypeface.Stretch,ElementName=fontPicker}"
-                           FontWeight="{Binding Path=SelectedFont.FamilyTypeface.Weight,ElementName=fontPicker}"
-                           FontStyle="{Binding Path=SelectedFont.FamilyTypeface.Style,ElementName=fontPicker}"
-                           FontSize="{Binding Path=SelectedFont.FontSize,ElementName=fontPicker}"/>
-                        </Grid>
-                        <cf:FontPickerControl x:Name="fontPicker" Grid.Row="2" Width="auto" Height="auto" WithoutDecorations="{Binding ElementName=DecorationCheck,Path=IsChecked}" 
-                                              WithoutPreviewRow="{Binding ElementName=PreviewCheck,Path=IsChecked}"/>
+                        <StackPanel Grid.Row="1" Height="60" HorizontalAlignment="Center"  Orientation="Horizontal">
+                            <TextBlock Text="Test" Margin="5" VerticalAlignment="Center"
+                               FontFamily="{Binding SelectedFont.FontFamily,ElementName=fontPicker}"
+                               FontStretch="{Binding Path=SelectedFont.FontTypeFace.Stretch,ElementName=fontPicker}"
+                               FontWeight="{Binding Path=SelectedFont.FontTypeFace.Weight,ElementName=fontPicker}"
+                               FontStyle="{Binding Path=SelectedFont.FontTypeFace.Style,ElementName=fontPicker}"
+                               FontSize="{Binding Path=SelectedFont.FontSize,ElementName=fontPicker}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=SelectedFont.TextDecorationType,ElementName=fontPicker}" Value="OverLine">
+                                                <Setter Property="TextDecorations" Value="OverLine"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=SelectedFont.TextDecorationType,ElementName=fontPicker}" Value="Strikethrough">
+                                                <Setter Property="TextDecorations" Value="Strikethrough"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=SelectedFont.TextDecorationType,ElementName=fontPicker}" Value="Baseline">
+                                                <Setter Property="TextDecorations" Value="Baseline"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=SelectedFont.TextDecorationType,ElementName=fontPicker}" Value="Underline">
+                                                <Setter Property="TextDecorations" Value="Underline"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock Text="TestBindExtProperty" VerticalAlignment="Center" Margin="5"
+                                       cf:FontExtension.FontData="{Binding SelectedFont,ElementName=fontPicker,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock x:Name="BindExtProText" Text="TestBindExt2" VerticalAlignment="Center" Margin="5"
+                                       cf:FontExtension.FontData="{Binding SelectedFont}"/>
+                        </StackPanel>
+                        <cf:FontPickerControl x:Name="fontPicker" Grid.Row="2"  Width="Auto" Height="Auto" WithoutDecorations="{Binding ElementName=DecorationCheck,Path=IsChecked}" 
+                                              WithoutPreviewRow="{Binding ElementName=PreviewCheck,Path=IsChecked}" ValueChanged="fontPicker_ValueChanged"
+                                              Command="{Binding FontChangeCommand}" 
+                                              SelectedFont="{Binding SelectedFont}"/>
                     </Grid>
                 </GroupBox>
             </Grid>

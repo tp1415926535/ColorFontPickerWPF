@@ -1,20 +1,9 @@
 ﻿using ColorFontPickerWPF;
-using System;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DemoNETCore
 {
@@ -28,7 +17,9 @@ namespace DemoNETCore
             InitializeComponent();
             //PickerLanguageManager.settings.UIculture = new CultureInfo("en-US");
 
-            colorPickerPopup.DataContext = colorPicker.DataContext = new MainViewModel();
+            colorPickerPopup.DataContext = colorPicker.DataContext =
+            fontPicker.DataContext = fontPickerPopup.DataContext =
+            BindExtProText.DataContext = new MainViewModel();
         }
 
         private void ColorDialogButton_Click(object sender, RoutedEventArgs e)
@@ -66,6 +57,16 @@ namespace DemoNETCore
         private void colorPickerPopup_ValueChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
         {
             Debug.WriteLine(colorPickerPopup.ColorTextValue);
+        }
+
+        private void fontPicker_ValueChanged(object sender, RoutedPropertyChangedEventArgs<Font> e)
+        {
+            Debug.WriteLine(JsonConvert.SerializeObject(fontPicker.SelectedFont));
+        }
+
+        private void fontPickerPopup_ValueChanged(object sender, RoutedPropertyChangedEventArgs<Font> e)
+        {
+            Debug.WriteLine(JsonConvert.SerializeObject(fontPickerPopup.SelectedFont));
         }
     }
 
