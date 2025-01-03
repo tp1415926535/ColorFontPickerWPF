@@ -1,6 +1,7 @@
 ﻿using ColorFontPickerWPF;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Media;
@@ -14,8 +15,8 @@ namespace DemoNETCore
     {
         public MainWindow()
         {
+            //PickerLanguageManager.Settings.UIculture = new CultureInfo("en-US");
             InitializeComponent();
-            //PickerLanguageManager.settings.UIculture = new CultureInfo("en-US");
 
             colorPickerPopup.DataContext = colorPicker.DataContext =
             fontPicker.DataContext = fontPickerPopup.DataContext =

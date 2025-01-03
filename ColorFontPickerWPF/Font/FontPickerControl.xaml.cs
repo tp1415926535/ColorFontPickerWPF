@@ -86,7 +86,7 @@ namespace ColorFontPickerWPF
             try
             {
                 //Settings Example of the current language. 设置当前语言示例
-                string lan = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLower().Substring(0, 2);
+                string lan = currentCulture.Name.ToLower().Substring(0, 2);//System.Threading.Thread.CurrentThread.CurrentUICulture
                 for (int i = 0; i < LanguageCombo.Items.Count; i++)
                 {
                     ComboBoxItem comboBoxItem = LanguageCombo.Items[i] as ComboBoxItem;
