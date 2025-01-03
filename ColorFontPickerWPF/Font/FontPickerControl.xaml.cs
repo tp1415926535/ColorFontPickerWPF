@@ -320,36 +320,18 @@ namespace ColorFontPickerWPF
         /// 从指定控件获取字体为当前选中字体
         /// </summary>
         /// <param name="control"></param>
-        public void GetFont(Control control)
+        public void GetFont<T>(T control) where T : DependencyObject
         {
             SelectedFont = FontHelper.GetFont(control);
         }
         /// <summary>
-        /// Get the font from the specified textblock as the selected font
-        /// 从指定文本框获取字体为当前选中字体
-        /// </summary>
-        /// <param name="textBlock"></param>
-        public void GetFont(TextBlock textBlock)
-        {
-            SelectedFont = FontHelper.GetFont(textBlock);
-        }
-        /// <summary>
-        /// Sets the selected font to the font of the specified control
+        /// Sets the selected font to the specified control
         /// 将当前选中字体设置到指定控件的字体
         /// </summary>
         /// <param name="control"></param>
-        public void SetFont(Control control)
+        public void SetFont<T>(T control) where T : DependencyObject
         {
             FontHelper.SetFont(control, SelectedFont);
-        }
-        /// <summary>
-        /// Sets the selected font to the font of the specified textblock
-        /// 将当前选中字体设置到指定控件的文本框
-        /// </summary>
-        /// <param name="textblock"></param>
-        public void SetFont(TextBlock textblock)
-        {
-            FontHelper.SetFont(textblock, SelectedFont);
         }
         #endregion
     }
