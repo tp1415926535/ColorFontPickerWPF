@@ -22,9 +22,9 @@ namespace ColorFontPickerWPF
             //control.GetType().GetProperty(nameof(Control.FontFamily)).GetValue(control)
             font.FontFamily = (FontFamily)control.GetValue(Control.FontFamilyProperty) ?? Fonts.SystemFontFamilies.First();
             font.FontSize = (double)(control.GetValue(Control.FontSizeProperty) ?? 12.0);
-            font.FontTypeFace.Style = (FontStyle)(control.GetValue(Control.FontStyleProperty) ?? FontStyles.Normal);
-            font.FontTypeFace.Stretch = (FontStretch)(control.GetValue(Control.FontStretchProperty) ?? FontStretches.Normal);
-            font.FontTypeFace.Weight = (FontWeight)(control.GetValue(Control.FontWeightProperty) ?? FontWeights.Normal);
+            font.FontStyle = (FontStyle)(control.GetValue(Control.FontStyleProperty) ?? FontStyles.Normal);
+            font.FontStretch = (FontStretch)(control.GetValue(Control.FontStretchProperty) ?? FontStretches.Normal);
+            font.FontWeight = (FontWeight)(control.GetValue(Control.FontWeightProperty) ?? FontWeights.Normal);
 
             var decorations = control.GetValue(TextBlock.TextDecorationsProperty) as TextDecorationCollection;
             if (decorations != null && decorations.Count > 0)
@@ -72,17 +72,14 @@ namespace ColorFontPickerWPF
 
             if (fontFamilyProperty != null)
                 fontFamilyProperty.SetValue(control, font.FontFamily);
-            if (fontSizeProperty != null)
+            if (fontSizeProperty != null && font.FontSize > 0)
                 fontSizeProperty.SetValue(control, font.FontSize);
-            if (font.FontTypeFace != null)
-            {
-                if (fontStyleProperty != null)
-                    fontStyleProperty.SetValue(control, font.FontTypeFace.Style);
-                if (fontStretchProperty != null)
-                    fontStretchProperty.SetValue(control, font.FontTypeFace.Stretch);
-                if (fontWeightProperty != null)
-                    fontWeightProperty.SetValue(control, font.FontTypeFace.Weight);
-            }
+            if (fontStyleProperty != null)
+                fontStyleProperty.SetValue(control, font.FontStyle);
+            if (fontStretchProperty != null)
+                fontStretchProperty.SetValue(control, font.FontStretch);
+            if (fontWeightProperty != null)
+                fontWeightProperty.SetValue(control, font.FontWeight);
             if (textDecorationsProperty != null && font.TextDecorationType != TextDecorationType.None)
             {
                 TextDecorationCollection collect = null;

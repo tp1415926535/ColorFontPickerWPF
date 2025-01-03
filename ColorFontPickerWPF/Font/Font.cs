@@ -50,20 +50,51 @@ namespace ColorFontPickerWPF
             }
         }
 
-        private FontTypeFace _FontTypeFace = new FontTypeFace();
+        private FontStyle _FontStyle;
         /// <summary>
-        /// font family Typeface
-        /// 字体样式
+        /// font style: Normal, italicized, etc.
+        /// 文本样式：正常，斜体等
         /// </summary>
-        public FontTypeFace FontTypeFace
+        public FontStyle FontStyle
         {
-            get { return _FontTypeFace; }
+            get { return _FontStyle; }
             set
             {
-                _FontTypeFace = value;
+                _FontStyle = value;
                 NotifyPropertyChanged();
             }
-        } 
+        }
+
+        private FontWeight _FontWeight;
+        /// <summary>
+        /// font weight: regular, bold, etc.
+        /// 字重：常规，加粗等
+        /// </summary>
+        public FontWeight FontWeight
+        {
+            get { return _FontWeight; }
+            set
+            {
+                _FontWeight = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private FontStretch _FontStretch;
+        /// <summary>
+        /// font stretch: Normal, Expanded, Condensed, etc.
+        /// 文本拉伸方式：正常、拉伸、压缩等
+        /// </summary>
+        public FontStretch FontStretch
+        {
+            get { return _FontStretch; }
+            set
+            {
+                _FontStretch = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         private double _FontSize;
         /// <summary>
@@ -80,63 +111,4 @@ namespace ColorFontPickerWPF
             }
         }
     }
-
-    /// <summary>
-    /// font family Typeface
-    /// 字体样式
-    /// </summary>
-    public class FontTypeFace : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private FontStyle _Style;
-        /// <summary>
-        /// font style: Normal, italicized, etc.
-        /// 文本样式：正常，斜体等
-        /// </summary>
-        public FontStyle Style
-        {
-            get { return _Style; }
-            set
-            {
-                _Style = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private FontWeight _Weight;
-        /// <summary>
-        /// font weight: regular, bold, etc.
-        /// 字重：常规，加粗等
-        /// </summary>
-        public FontWeight Weight
-        {
-            get { return _Weight; }
-            set
-            {
-                _Weight = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        private FontStretch _Stretch;
-        /// <summary>
-        /// font stretch: Normal, Expanded, Condensed, etc.
-        /// 文本拉伸方式：正常、拉伸、压缩等
-        /// </summary>
-        public FontStretch Stretch
-        {
-            get { return _Stretch; }
-            set
-            {
-                _Stretch = value;
-                NotifyPropertyChanged();
-            }
-        }
-    }
-
 }

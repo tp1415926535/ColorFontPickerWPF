@@ -23,6 +23,11 @@ namespace ColorFontPickerWPF
     public partial class FontPickerControl : UserControl
     {
         /// <summary>
+        /// Prevents properties from being re-altered when changing from internal code
+        /// 从内部方法更改时防止被属性被重改
+        /// </summary>
+        bool changing { get; set; } = false;
+        /// <summary>
         /// Initialisation check
         /// 初始化校验
         /// </summary>
@@ -100,38 +105,45 @@ namespace ColorFontPickerWPF
         /// </summary>
         private void UpdateFontChanged()
         {
-            if (SelectedFont == null)
-                SelectedFont = defaultFont;
+            if (changing) return;
+            try
+            {
+                changing = true;
+                if (SelectedFont == null)
+                    SelectedFont = defaultFont;
 
-            if (!(SizeSelector.SelectedItem != null && fontSizeDic[SizeSelector.SelectedValue.ToString()] == SelectedFont.FontSize))
-                SizeSelector.SelectedItem = fontSizeDic.FirstOrDefault(x => x.Value.Equals(SelectedFont.FontSize));
-            if (SizeSelector.SelectedItem == null)
-                SizeTextbox.Text = SelectedFont.FontSize.ToString();
-            switch (SelectedFont.TextDecorationType)
-            {
-                case TextDecorationType.None:
-                    NoLineRadio.IsChecked = true;
-                    break;
-                case TextDecorationType.OverLine:
-                    OverLineRadio.IsChecked = true;
-                    break;
-                case TextDecorationType.Strikethrough:
-                    StrikethroughRadio.IsChecked = true;
-                    break;
-                case TextDecorationType.Baseline:
-                    BaselineRadio.IsChecked = true;
-                    break;
-                case TextDecorationType.Underline:
-                    UnderlineRadio.IsChecked = true;
-                    break;
+                if (!(SizeSelector.SelectedItem != null && fontSizeDic[SizeSelector.SelectedValue.ToString()] == SelectedFont.FontSize))
+                    SizeSelector.SelectedItem = fontSizeDic.FirstOrDefault(x => x.Value.Equals(SelectedFont.FontSize));
+                if (SizeSelector.SelectedItem == null)
+                    SizeTextbox.Text = SelectedFont.FontSize.ToString();
+                switch (SelectedFont.TextDecorationType)
+                {
+                    case TextDecorationType.None:
+                        NoLineRadio.IsChecked = true;
+                        break;
+                    case TextDecorationType.OverLine:
+                        OverLineRadio.IsChecked = true;
+                        break;
+                    case TextDecorationType.Strikethrough:
+                        StrikethroughRadio.IsChecked = true;
+                        break;
+                    case TextDecorationType.Baseline:
+                        BaselineRadio.IsChecked = true;
+                        break;
+                    case TextDecorationType.Underline:
+                        UnderlineRadio.IsChecked = true;
+                        break;
+                }
+                vm.FamilyTypeFace = new FamilyTypeface()
+                {
+                    Stretch = SelectedFont.FontStretch,
+                    Style = SelectedFont.FontStyle,
+                    Weight = SelectedFont.FontWeight,
+                };
+                ScrollToSelection();
             }
-            vm.FamilyTypeFace = new FamilyTypeface()
-            {
-                Stretch = SelectedFont.FontTypeFace.Stretch,
-                Style = SelectedFont.FontTypeFace.Style,
-                Weight = SelectedFont.FontTypeFace.Weight,
-            };
-            ScrollToSelection();
+            catch { }
+            changing = false;
         }
 
         /// <summary>
@@ -200,12 +212,15 @@ namespace ColorFontPickerWPF
         {
             if (!loaded) return;
             if (vm.FamilyTypeFace == null) return;
-            SelectedFont.FontTypeFace = new FontTypeFace()
+            changing = true;
+            try
             {
-                Stretch = vm.FamilyTypeFace.Stretch,
-                Style = vm.FamilyTypeFace.Style,
-                Weight = vm.FamilyTypeFace.Weight,
-            };
+                SelectedFont.FontStretch = vm.FamilyTypeFace.Stretch;
+                SelectedFont.FontStyle = vm.FamilyTypeFace.Style;
+                SelectedFont.FontWeight = vm.FamilyTypeFace.Weight;
+            }
+            catch { }
+            changing = false;
         }
         /// <summary>
         /// When the font family typeface textbox changes

@@ -118,9 +118,9 @@
                         <StackPanel Grid.Row="1" Height="60" HorizontalAlignment="Center"  Orientation="Horizontal">
                             <TextBlock Text="Test" Margin="5" VerticalAlignment="Center"
                                FontFamily="{Binding SelectedFont.FontFamily,ElementName=fontPicker}"
-                               FontStretch="{Binding Path=SelectedFont.FontTypeFace.Stretch,ElementName=fontPicker}"
-                               FontWeight="{Binding Path=SelectedFont.FontTypeFace.Weight,ElementName=fontPicker}"
-                               FontStyle="{Binding Path=SelectedFont.FontTypeFace.Style,ElementName=fontPicker}"
+                               FontStretch="{Binding Path=SelectedFont.FontStretch,ElementName=fontPicker}"
+                               FontWeight="{Binding Path=SelectedFont.FontWeight,ElementName=fontPicker}"
+                               FontStyle="{Binding Path=SelectedFont.FontStyle,ElementName=fontPicker}"
                                FontSize="{Binding Path=SelectedFont.FontSize,ElementName=fontPicker}">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">

@@ -166,37 +166,6 @@ namespace ColorFontPickerWPF
     }
 
 
-
-    /// <summary>
-    /// typeFace转字体
-    /// </summary>
-    public class FontTypeFaceConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            FontTypeFace t = (FontTypeFace)value;
-            var typeFace = new FontTypeFace
-            {
-                Stretch = t.Stretch,
-                Style = t.Style,
-                Weight = t.Weight,
-            };
-            return typeFace;
-        }
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            FamilyTypeface t = (FamilyTypeface)value;
-            var typeFace = new FontTypeFace
-            {
-                Stretch = t.Stretch,
-                Style = t.Style,
-                Weight = t.Weight,
-            };
-            return typeFace;
-        }
-    }
-
-
     /// <summary>
     /// Replace {fontsize} with actual font size
     /// 将{fontsize}替换为实际字号

@@ -17,9 +17,9 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
                        FontFamily="{Binding SelectedFont.FontFamily,ElementName=fontPicker}"
-                       FontStretch="{Binding Path=SelectedFont.FontTypeFace.Stretch,ElementName=fontPicker}"
-                       FontWeight="{Binding Path=SelectedFont.FontTypeFace.Weight,ElementName=fontPicker}"
-                       FontStyle="{Binding Path=SelectedFont.FontTypeFace.Style,ElementName=fontPicker}">
+                       FontStretch="{Binding Path=SelectedFont.FontStretch,ElementName=fontPicker}"
+                       FontWeight="{Binding Path=SelectedFont.FontWeight,ElementName=fontPicker}"
+                       FontStyle="{Binding Path=SelectedFont.FontStyle,ElementName=fontPicker}">
                     <TextBlock.Text>
                         <MultiBinding Converter="{StaticResource FontTextConverter}">
                             <Binding Path="FontText" RelativeSource="{RelativeSource AncestorType={x:Type UserControl}, Mode=FindAncestor}"/>
