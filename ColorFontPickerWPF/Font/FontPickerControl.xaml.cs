@@ -27,6 +27,7 @@ namespace ColorFontPickerWPF
         /// 从内部方法更改时防止被属性被重改
         /// </summary>
         bool changing { get; set; } = false;
+
         /// <summary>
         /// Initialisation check
         /// 初始化校验
@@ -37,18 +38,24 @@ namespace ColorFontPickerWPF
         /// defualt font
         /// 默认字体
         /// </summary>
-        Font defaultFont { get; set; } = new Font() { FontFamily = new FontFamily("Microsoft YaHei UI"), FontSize = 12 };
+        Font defaultFont { get; set; } = new Font() { FontSize = 12 };
 
         /// <summary>
         /// Font Size Display and Corresponding Size Dictionary
         /// 字号显示和对应大小字典
         /// </summary>
-        Dictionary<string, double> fontSizeDic { get; set; } = new Dictionary<string, double>
+        static Dictionary<string, double> fontSizeDic { get; set; } = new Dictionary<string, double>
         {
             {"8",8 },{"9",9},{"10",10},{"11",11 },{"12",12},{"14",14},{"16",16 },{"18",18},{"20",20},{"22",22},{"24",24},{"26",26},{"28",28 },{"36",36},{"48",48},{"72",72},
             {"初号",42 },{"小初",36 },{"一号",26 },{"小一",24 },{"二号",22 },{"小二",18 },{"三号",16 },{"小三",15 },{"四号",14 },{"小四",12 },{"五号",10.5 },{"小五",9 },
             {"六号",7.5 },{"小六",6.5 },{"七号",5.5 },{"八号",5 },
         };
+
+        /// <summary>
+        /// all font names
+        /// 所有字体名称
+        /// </summary>
+        static List<string> fontNames { get; set; } = Fonts.SystemFontFamilies.SelectMany(f => f.FamilyNames.Values).Select(f => f.ToLowerInvariant()).ToList();
 
         /// <summary>
         /// font family typeface ViewModel
@@ -64,11 +71,18 @@ namespace ColorFontPickerWPF
             var language = XmlLanguage.GetLanguage(CultureInfo.CurrentUICulture.Name);
             var list = Fonts.SystemFontFamilies.Select(font => font.FamilyNames.ContainsKey(language) && !string.IsNullOrEmpty(font.FamilyNames[language]) ?
                                                                 new FontFamily(font.FamilyNames[language]) : font);
+
+            if (fontNames.Contains("Microsoft YaHei UI".ToLowerInvariant()))
+                defaultFont.FontFamily = new FontFamily("Microsoft YaHei UI");
+            else
+                defaultFont.FontFamily = list.First();
+
             FontSelector.ItemsSource = list;
             SizeSelector.ItemsSource = fontSizeDic;
             TypefaceSelector.DataContext = FontTextbox.DataContext = vm;
 
-            var currentCulture = PickerLanguageManager.Settings.UIculture;//Setting the default language resource 设置默认的语言资源
+            //Setting the default language resource 设置默认的语言资源
+            var currentCulture = PickerLanguageManager.Settings.UIculture;
             try
             {
                 //Settings Example of the current language. 设置当前语言示例
@@ -111,7 +125,7 @@ namespace ColorFontPickerWPF
                 changing = true;
                 if (SelectedFont == null)
                     SelectedFont = defaultFont;
-
+                vm.FontFamilyText = SelectedFont.FontFamily.ToString();
                 if (!(SizeSelector.SelectedItem != null && fontSizeDic[SizeSelector.SelectedValue.ToString()] == SelectedFont.FontSize))
                     SizeSelector.SelectedItem = fontSizeDic.FirstOrDefault(x => x.Value.Equals(SelectedFont.FontSize));
                 if (SizeSelector.SelectedItem == null)
@@ -157,6 +171,7 @@ namespace ColorFontPickerWPF
             SizeSelector.ScrollIntoView(SizeSelector.SelectedItem);
         }
 
+        #region Font Family
         /// <summary>
         /// When the font family list selection changes
         /// 当字体列表选中项变更
@@ -178,8 +193,7 @@ namespace ColorFontPickerWPF
         private void FontTextbox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(vm.FontFamilyText)) return;
-            if (FontSelector.SelectedItem == null) return;
-            if (vm.FontFamilyText == FontSelector.SelectedItem.ToString())
+            if (FontSelector.SelectedItem != null && vm.FontFamilyText == FontSelector.SelectedItem.ToString())
             {
                 FontSelector.ScrollIntoView(FontSelector.SelectedItem);
                 return;
@@ -201,7 +215,9 @@ namespace ColorFontPickerWPF
                 }
             }
         }
+        #endregion
 
+        #region Family Typeface
         /// <summary>
         /// When the font family typeface list selection changes
         /// 当字体样式列表选中项变化
@@ -231,8 +247,7 @@ namespace ColorFontPickerWPF
         private void TypefaceTextbox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(TypefaceTextbox.Text)) return;
-            if (TypefaceSelector.SelectedItem == null) return;
-            if (TypefaceTextbox.Text.Equals(TypefaceSelector.SelectedItem.ToString()))
+            if (TypefaceSelector.SelectedItem != null && TypefaceTextbox.Text == TypefaceSelector.SelectedItem.ToString())
             {
                 TypefaceSelector.ScrollIntoView(TypefaceSelector.SelectedItem);
                 return;
@@ -254,7 +269,9 @@ namespace ColorFontPickerWPF
                 }
             }
         }
+        #endregion
 
+        #region Font Size
         /// <summary>
         /// When the font size list selection changes
         /// 字号列表选中项变更
@@ -276,16 +293,13 @@ namespace ColorFontPickerWPF
         private void SizeTextbox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(SizeTextbox.Text)) return;
-            if (SizeSelector.SelectedItem != null)
+            if (SizeSelector.SelectedItem != null && SizeTextbox.Text == SizeSelector.SelectedValue.ToString())
             {
-                if (SizeTextbox.Text == SizeSelector.SelectedValue.ToString())
-                {
-                    SizeSelector.ScrollIntoView(SizeSelector.SelectedItem);
-                    return;
-                }
+                SizeSelector.ScrollIntoView(SizeSelector.SelectedItem);
+                return;
             }
             double value = 0;
-            if (double.TryParse(SizeTextbox.Text, out value)&& value > 0)
+            if (double.TryParse(SizeTextbox.Text, out value) && value > 0)
             {
                 SelectedFont.FontSize = value;
                 SizeSelector.SelectedValue = fontSizeDic.FirstOrDefault(x => x.Value.Equals(SelectedFont.FontSize)).Key;
@@ -297,6 +311,7 @@ namespace ColorFontPickerWPF
             }
             SizeSelector.ScrollIntoView(SizeSelector.SelectedItem);
         }
+        #endregion
 
         /// <summary>
         /// Text Decorator Selection Changes
